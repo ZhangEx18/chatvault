@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>权限码与激活 · 聊天档案 ChatVault</title>
+<meta name="description" content="权限码怎么获取、怎么激活、换电脑与重装系统怎么办。">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://miaoda.feishu.cn" crossorigin>
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .doc { display: grid; grid-template-columns: 216px minmax(0, 1fr); gap: 56px; align-items: start; }
+  .doc__side { position: sticky; top: 96px; font-size: 13.5px; }
+  .doc__side h5 { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #8f8a80; margin: 22px 0 8px; font-weight: 600; }
+  .doc__side h5:first-child { margin-top: 0; }
+  .doc__side a { display: block; padding: 6px 0; color: var(--muted); text-decoration: none; border-left: 2px solid transparent; padding-left: 12px; margin-left: -14px; }
+  .doc__side a:hover { color: var(--pine-2); border-left-color: var(--mint); }
+  .doc__body h2 { font-family: var(--serif); font-size: 24px; margin: 56px 0 16px; padding-top: 8px; scroll-margin-top: 92px; }
+  .doc__body h2:first-child { margin-top: 0; }
+  .doc__body h3 { font-size: 16px; margin: 32px 0 10px; }
+  .doc__body p, .doc__body li { font-size: 14.5px; line-height: 1.85; color: #3a423f; }
+  .doc__body ul, .doc__body ol { padding-left: 22px; }
+  .doc__body li { margin: 6px 0; }
+  .doc__body code {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px;
+    background: var(--paper-2); padding: 2px 6px; border-radius: 5px; color: var(--pine-2);
+  }
+  .doc__body pre {
+    background: #141413; color: #d7e5e0; padding: 16px 18px; border-radius: 12px;
+    overflow-x: auto; font-size: 13px; line-height: 1.7; margin: 16px 0;
+  }
+  .doc__body pre code { background: none; padding: 0; color: inherit; font-size: 13px; }
+  .note {
+    border-left: 3px solid var(--mint); background: var(--mint-soft);
+    padding: 14px 18px; border-radius: 0 10px 10px 0; margin: 18px 0; font-size: 14px;
+  }
+  .note b { color: var(--pine-2); }
+  .fp-box {
+    background: var(--paper-2); border: 1px dashed var(--line-strong); border-radius: 10px;
+    padding: 14px 16px; font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 13px; color: var(--pine-2); word-break: break-all; margin: 12px 0;
+  }
+  table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+  th { font-size: 12.5px; color: var(--muted); font-weight: 600; letter-spacing: .04em; }
+  td code { font-size: 12.5px; }
+  @media (max-width: 860px) {
+    .doc { grid-template-columns: 1fr; gap: 24px; }
+    .doc__side { position: static; border-bottom: 1px solid var(--line); padding-bottom: 16px; }
+    .doc__side a { display: inline-block; margin: 0 12px 0 0; padding: 4px 0; border-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap nav__inner">
+    <a class="brand" href="index.html">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#d97757" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v18H6.5A2.5 2.5 0 0 1 4 18.5z"/><path d="M8 8h7M8 12h5"/></svg>
+      </span>
+      聊天档案 <span class="brand__sub">CHATVAULT</span>
+    </a>
+    <nav class="nav__links">
+      <a href="index.html#c2">功能</a>
+      <a href="docs.html">文档</a>
+      <a class="btn btn--primary btn--sm nav__cta" href="index.html#c5">免费下载</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="section" style="padding-top:120px">
+    <div class="wrap">
+      <div class="doc">
+        <aside class="doc__side">
+          <h5>权限码</h5>
+          <a href="#what">它是什么</a>
+          <a href="#get">怎么拿到</a>
+          <a href="#use">怎么激活</a>
+          <h5>变化</h5>
+          <a href="#renew">续期</a>
+          <a href="#move">换电脑</a>
+          <a href="#reinstall">重装系统</a>
+          <h5>排查</h5>
+          <a href="#fail">激活失败对照表</a>
+          <a href="#free">免费版与会员</a>
+        </aside>
+
+        <div class="doc__body">
+
+          <h2 id="what">权限码是什么</h2>
+          <p>一串这个格式的字符：</p>
+          <pre><code>CV-7K3M2-QP9XA-4RTWD-8HN5C-2VJ</code></pre>
+          <p>它是<strong>离线券</strong>——用 HMAC 签过名，软件本地就能验真伪，不需要联网，也不需要登录账号。激活后绑定这台电脑的 <code>IOPlatformUUID</code>。</p>
+
+          <h2 id="get">怎么拿到</h2>
+          <ol>
+            <li>打开软件 → 右上角「开通会员」，能看到当前的时长档位</li>
+            <li>加微信 <b>wxid_kvni9uk7qnlc12</b>（9:00–22:00），告诉我要哪个档位</li>
+            <li>按软件里显示的金额转账或赞赏，把截图发过去</li>
+            <li>收到权限码，通常十分钟内</li>
+          </ol>
+
+          <h2 id="use">怎么激活</h2>
+          <ol>
+            <li>打开软件，点右上角「开通会员」</li>
+            <li>弹窗底部有输入框，把权限码粘进去（带不带横杠都能识别）</li>
+            <li>点「激活」</li>
+            <li>右上角的状态会从「免费版」变成「黄金会员」，会员按钮消失</li>
+          </ol>
+          <div class="note"><b>激活不联网。</b>机场、高铁、断网的山里都能激活，到期时间按本机时间算。</div>
+
+          <h2 id="renew">续期</h2>
+          <p>到期后再买一次，拿新码在同一个输入框激活即可，新时长从激活时刻往后算。旧码不会被覆盖，只是到期了。</p>
+
+          <h2 id="move">换电脑</h2>
+          <p>权限码绑定 <code>IOPlatformUUID</code>，拷到另一台机器会提示「权限码无效」。换机前把旧电脑上的微信记录导完，然后加微信 <b>wxid_kvni9uk7qnlc12</b> 说明情况，可以补发。</p>
+
+          <h2 id="reinstall">重装系统</h2>
+          <p>硬件没换、<code>IOPlatformUUID</code> 不变的话，重装后重新粘一次原来的权限码即可，不用重新买。</p>
+
+          <h2 id="fail">激活失败对照表</h2>
+          <table>
+            <tr><th>提示</th><th>原因</th><th>怎么办</th></tr>
+            <tr><td>权限码格式不正确</td><td>抄漏字符 / 多了空格</td><td>整串重新复制，别手打</td></tr>
+            <tr><td>权限码无效</td><td>签名对不上，可能是伪造或改过</td><td>找发码的人核对</td></tr>
+            <tr><td>权限码已过期</td><td>签发超过一年，或已经到期</td><td>重新购买</td></tr>
+            <tr><td>与本机不匹配</td><td>码是给另一台电脑签的</td><td>联系补发</td></tr>
+          </table>
+
+          <h2 id="free">免费版与会员</h2>
+          <table>
+            <tr><th></th><th>免费版</th><th>会员</th></tr>
+            <tr><td>单会话导出条数</td><td>最近 300 条</td><td>不限</td></tr>
+            <tr><td>七种格式</td><td>全部可用</td><td>全部可用</td></tr>
+            <tr><td>语音转文字</td><td>不可用</td><td>可用</td></tr>
+            <tr><td>自动导出</td><td>—</td><td>可用</td></tr>
+            <tr><td>时间范围筛选</td><td>—</td><td>可用</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__bottom">
+      <span>© 2026 聊天档案</span>
+      <span><a href="legal/terms.html">用户协议</a> · <a href="legal/privacy.html">隐私政策</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/app.js" defer></script>
+</body>
+</html>

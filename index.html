@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>聊天档案 ChatVault · 微信聊天记录导出工具</title>
+<meta name="description" content="把微信 4.x 的聊天记录导出成 HTML、PDF、Excel、CSV、JSON、Markdown、TXT 七种格式。本地解密、语音本地转写、数据不上传，Windows 与 macOS 都能用。">
+<meta name="theme-color" content="#1f1e1d">
+<meta property="og:type" content="website">
+<meta property="og:title" content="聊天档案 ChatVault · 微信聊天记录导出工具">
+<meta property="og:description" content="你的聊天记录，应该能带得走。">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://miaoda.feishu.cn" crossorigin>
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="dossier">
+
+<header class="topbar">
+  <div class="topbar__in">
+    <a class="topbar__brand" href="#top">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#d97757" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v18H6.5A2.5 2.5 0 0 1 4 18.5z"/><path d="M8 8h7M8 12h5"/></svg>
+      聊天档案 <span>CHATVAULT</span>
+    </a>
+    <div class="topbar__right">
+      <span class="topbar__ver">v0.1.0</span>
+      <a class="topbar__link" href="docs.html">文档</a>
+      <a class="topbar__btn" href="#c5">下载</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ 封面 ============ -->
+<section class="cover">
+  <div class="cover__in">
+    <p class="cover__kicker">微信聊天记录导出工具 · 本地运行</p>
+    <h1 class="cover__title">你的聊天记录，<br>应该能带得走。</h1>
+    <p class="cover__sub">
+      微信把聊天存在本地一个加密数据库里，除了微信自己，谁也打不开。
+      聊天档案把这个库读出来，导出成能搜索、能打印、能发给别人的文件——解密和导出都在你自己的电脑上完成。
+    </p>
+    <dl class="cover__spec">
+      <div><dt>支持</dt><dd>微信 4.x 桌面版</dd></div>
+      <div><dt>系统</dt><dd>Windows 10+ / macOS 12+</dd></div>
+      <div><dt>格式</dt><dd>7 种</dd></div>
+      <div><dt>免费版</dt><dd>单会话 300 条</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ============ 正文双栏 ============ -->
+<div class="layout">
+  <aside class="rail">
+    <nav class="rail__nav" aria-label="目录">
+      <a href="#c1"><i>01</i>它做什么</a>
+      <a href="#c2"><i>02</i>导出什么</a>
+      <a href="#c3"><i>03</i>怎么用</a>
+      <a href="#c4"><i>04</i>隐私</a>
+      <a href="#c5"><i>05</i>下载</a>
+    </nav>
+    <p class="rail__note">遇到问题加微信<br><b>wxid_kvni9uk7qnlc12</b><br>9:00–22:00</p>
+  </aside>
+
+  <div class="body">
+
+    <!-- 01 -->
+    <section class="chapter" id="c1">
+      <header class="chapter__head"><span>01</span><h2>它做什么</h2></header>
+      <p class="chapter__lede">
+        打开软件，先看到的是这台电脑上登录过的微信账号。选一个、取到数据库密钥，会话列表就出来了——
+        按人按群勾选，选个格式，剩下的交给进度条。导出的每个会话是一个独立文件夹，里面有网页、图片、语音和一张联系人表。
+      </p>
+
+      <div class="tree">
+        <div class="tree__head">李老师_聊天记录 /</div>
+        <pre><code>├── index.html                 1.8 MB
+├── media/
+│   ├── voice_0041.mp3
+│   ├── img_0087.jpg
+│   └── avatar_li.jpg
+├── 联系人信息.csv
+└── 李老师_聊天记录.pdf</code></pre>
+        <p class="tree__cap">导出的每个会话就是这样一个文件夹，压缩后可以直接发给别人。</p>
+      </div>
+
+      <ul class="points">
+        <li><b>不用联网也能导出</b>　解密、解析、渲染全在本机，飞机上也能用。</li>
+        <li><b>图片和语音是真的图片和语音</b>　不是「[图片]」占位，文件都在 media 目录里。</li>
+        <li><b>一个会话一个文件夹</b>　整个目录压缩发给别人，对方双击就能看。</li>
+      </ul>
+    </section>
+
+    <!-- 02 -->
+    <section class="chapter" id="c2">
+      <header class="chapter__head"><span>02</span><h2>导出什么</h2></header>
+      <p class="chapter__lede">同一个会话可以导出成七种文件，按你要拿它干什么来选。</p>
+
+      <table class="spec">
+        <thead><tr><th>格式</th><th>拿来做什么</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td><code>html</code></td><td>发给别人看</td><td>带搜索框、图片、语音，最完整的一种</td></tr>
+          <tr><td><code>pdf</code></td><td>打印、存档</td><td>由 HTML 排版后转，需要本机装有 Edge</td></tr>
+          <tr><td><code>xlsx</code></td><td>做统计、给同事</td><td>一行一条消息的 Excel 工作簿</td></tr>
+          <tr><td><code>csv</code></td><td>丢进表格或数据库</td><td>UTF-8 BOM 编码，Excel 打开不乱码</td></tr>
+          <tr><td><code>json</code></td><td>二次开发</td><td>结构化，含发送者、时间、消息类型</td></tr>
+          <tr><td><code>md</code></td><td>进笔记软件</td><td>Markdown，可导入 Obsidian / Notion</td></tr>
+          <tr><td><code>txt</code></td><td>贴到别处</td><td>纯文本，最通用</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 03 -->
+    <section class="chapter" id="c3">
+      <header class="chapter__head"><span>03</span><h2>怎么用</h2></header>
+      <ol class="steps">
+        <li>
+          <b>选账号</b>
+          <p>面板列出本机登录过的微信账号，显示的是昵称。点一个。</p>
+        </li>
+        <li>
+          <b>取数据库密钥</b>
+          <p>macOS 可以一键自动获取，会弹一次管理员密码（微信是 hardened runtime，没有管理员授权附加不进去）。也可以粘贴已有密钥，或者指向另一台机器拷来的数据目录。</p>
+        </li>
+        <li>
+          <b>勾会话，导出</b>
+          <p>按人、按群勾选，选格式，要转语音就打开开关。进度条走完自动打开输出文件夹。</p>
+        </li>
+      </ol>
+
+      <div class="callout">
+        <b>macOS 第一次打开会被拦。</b>
+        安装包没有 Apple 开发者证书，系统会提示「无法验证开发者」或「已损坏」。
+        打开终端执行一次 <code>xattr -cr /Applications/ChatVault.app</code> 就好，以后不再提示。
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section class="chapter" id="c4">
+      <header class="chapter__head"><span>04</span><h2>隐私</h2></header>
+      <p class="chapter__lede">
+        聊天记录是最私人的数据。这个软件没有服务器来存它，也不做任何上传——
+        数据库、密钥、图片、语音都只在你的机器上。本地服务只监听 <code>127.0.0.1</code>，端口随机，带一次性令牌，同机其它程序也读不到。
+      </p>
+
+      <table class="spec">
+        <thead><tr><th>动作</th><th>联网情况</th></tr></thead>
+        <tbody>
+          <tr><td>导出、浏览、检索</td><td>0 次请求</td></tr>
+          <tr><td>解密数据库</td><td>本地文件读写</td></tr>
+          <tr><td>语音转文字</td><td>本地 whisper.cpp，不上传</td></tr>
+          <tr><td>下载语音模型</td><td>仅首次，181 MB，之后不再联网</td></tr>
+          <tr><td>版本检查 / 遥测</td><td>没有</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 05 -->
+    <section class="chapter" id="c5">
+      <header class="chapter__head"><span>05</span><h2>下载</h2></header>
+      <p class="chapter__lede">安装包放在网盘，按你的系统选一个。里面是 <b>ChatVault</b> 文件夹。</p>
+
+      <div class="dl">
+        
+        <div class="dl__row">
+          <div class="dl__plat"><b>百度网盘</b><span>浏览器打开 · 需提取码</span></div>
+          <div class="dl__act">
+            <a class="btn btn--primary btn--sm" href="https://pan.baidu.com/s/1KtKhnTzkLjK-eMkXe6HSog?pwd=Chat" target="_blank" rel="noopener">打开百度网盘</a>
+            <button class="btn btn--ghost btn--sm" type="button" id="copyPwd" data-pwd="Chat">提取码 Chat</button>
+          </div>
+        </div>
+      </div>
+
+      <p class="chapter__note" style="margin-top:14px">
+        Windows 解压后双击 <code>ChatVault.exe</code>（SmartScreen 提示时点「更多信息 → 仍要运行」）；
+        macOS 解压后拖进「应用程序」，首次打开前执行上面那条 <code>xattr</code> 命令。
+      </p>
+
+      <div class="qa">
+        <details>
+          <summary>导出的档案能发给别人看吗？</summary>
+          <p>能。整个文件夹压缩发过去，对方双击 <code>index.html</code> 就能看，不用装任何软件。</p>
+        </details>
+        <details>
+          <summary>免费版能用到什么程度？</summary>
+          <p>每个会话最近 300 条，七种格式都能用，不限时间。语音转文字点了会提示开通会员。</p>
+        </details>
+        <details>
+          <summary>语音转文字调用哪个接口？</summary>
+          <p>不调用接口。内置 whisper.cpp 和 181 MB 的 ggml-small 模型，转写在你自己的电脑上完成。</p>
+        </details>
+        <details>
+          <summary>会不会影响微信正常使用？</summary>
+          <p>只读本地数据库，不修改微信的数据。自动取密钥那一步会重启一次微信，取完自动帮你打开。</p>
+        </details>
+        <details>
+          <summary>换电脑后权限码还能用吗？</summary>
+          <p>权限码绑定本机的 IOPlatformUUID，换机会激活失败。加微信 wxid_kvni9uk7qnlc12 说明情况可以补发。</p>
+        </details>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__in">
+    <div class="foot__brand">
+      <b>聊天档案 CHATVAULT</b>
+      <p>微信聊天记录导出工具。本地解密，数据不上传。</p>
+    </div>
+    <div class="foot__links">
+      <a href="docs.html">使用文档</a>
+      <a href="activate.html">权限码与激活</a>
+      <a href="changelog.html">更新日志</a>
+      <a href="legal/terms.html">用户协议</a>
+      <a href="legal/privacy.html">隐私政策</a>
+    </div>
+    <div class="foot__legal">
+      <span>© 2026 聊天档案</span>
+      <span>非腾讯官方产品，与腾讯无隶属关系</span>
+      
+    </div>
+  </div>
+</footer>
+
+<script src="assets/app.js" defer></script>
+</body>
+</html>

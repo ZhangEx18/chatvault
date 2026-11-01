@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>使用文档 · 聊天档案 ChatVault</title>
+<meta name="description" content="聊天档案 ChatVault 的安装、取密钥、导出、语音转文字与权限码激活说明。">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://miaoda.feishu.cn" crossorigin>
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .doc { display: grid; grid-template-columns: 216px minmax(0, 1fr); gap: 56px; align-items: start; }
+  .doc__side { position: sticky; top: 96px; font-size: 13.5px; }
+  .doc__side h5 { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #8f8a80; margin: 22px 0 8px; font-weight: 600; }
+  .doc__side h5:first-child { margin-top: 0; }
+  .doc__side a { display: block; padding: 6px 0; color: var(--muted); text-decoration: none; border-left: 2px solid transparent; padding-left: 12px; margin-left: -14px; }
+  .doc__side a:hover { color: var(--pine-2); border-left-color: var(--mint); }
+  .doc__body h2 { font-family: var(--serif); font-size: 24px; margin: 56px 0 16px; padding-top: 8px; scroll-margin-top: 92px; }
+  .doc__body h2:first-child { margin-top: 0; }
+  .doc__body h3 { font-size: 16px; margin: 32px 0 10px; }
+  .doc__body p, .doc__body li { font-size: 14.5px; line-height: 1.85; color: #3a423f; }
+  .doc__body ul, .doc__body ol { padding-left: 22px; }
+  .doc__body li { margin: 6px 0; }
+  .doc__body code {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px;
+    background: var(--paper-2); padding: 2px 6px; border-radius: 5px; color: var(--pine-2);
+  }
+  .doc__body pre {
+    background: #141413; color: #d7e5e0; padding: 16px 18px; border-radius: 12px;
+    overflow-x: auto; font-size: 13px; line-height: 1.7; margin: 16px 0;
+  }
+  .doc__body pre code { background: none; padding: 0; color: inherit; font-size: 13px; }
+  .note {
+    border-left: 3px solid var(--mint); background: var(--mint-soft);
+    padding: 14px 18px; border-radius: 0 10px 10px 0; margin: 18px 0; font-size: 14px;
+  }
+  .note b { color: var(--pine-2); }
+  table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+  th { font-size: 12.5px; color: var(--muted); font-weight: 600; letter-spacing: .04em; }
+  td code { font-size: 12.5px; }
+  @media (max-width: 860px) {
+    .doc { grid-template-columns: 1fr; gap: 24px; }
+    .doc__side { position: static; border-bottom: 1px solid var(--line); padding-bottom: 16px; }
+    .doc__side a { display: inline-block; margin: 0 12px 0 0; padding: 4px 0; border-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap nav__inner">
+    <a class="brand" href="index.html">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#d97757" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v18H6.5A2.5 2.5 0 0 1 4 18.5z"/><path d="M8 8h7M8 12h5"/></svg>
+      </span>
+      聊天档案 <span class="brand__sub">CHATVAULT</span>
+    </a>
+    <nav class="nav__links">
+      <a href="index.html#c2">功能</a>
+      <a href="docs.html">文档</a>
+      <a class="btn btn--primary btn--sm nav__cta" href="index.html#c5">免费下载</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="section" style="padding-top:120px">
+    <div class="wrap">
+      <div class="doc">
+        <aside class="doc__side">
+          <h5>开始</h5>
+          <a href="#req">系统要求</a>
+          <a href="#install">下载与安装</a>
+          <a href="#account">选择账号</a>
+          <h5>连接微信</h5>
+          <a href="#key">获取数据库密钥</a>
+          <a href="#source">切换数据来源</a>
+          <h5>导出</h5>
+          <a href="#export">勾选会话导出</a>
+          <a href="#formats">七种格式</a>
+          <a href="#asr">语音转文字</a>
+          <h5>其它</h5>
+          <a href="#license">权限码激活</a>
+          <a href="#faq">常见故障</a>
+        </aside>
+
+        <div class="doc__body">
+
+          <h2 id="req">系统要求</h2>
+          <table>
+            <tr><th>项目</th><th>要求</th></tr>
+            <tr><td>操作系统</td><td>Windows 10 1803+ / Windows 11；macOS 12 Monterey 及以上（Apple 芯片）</td></tr>
+            <tr><td>微信</td><td>微信 4.x 桌面版（Windows / macOS），且已在这台电脑上登录过</td></tr>
+            <tr><td>磁盘</td><td>程序约 200 MB；语音模型 181 MB（可选）；导出体积取决于聊天量</td></tr>
+            <tr><td>macOS 取密钥</td><td>Xcode Command Line Tools（提供 <code>lldb</code>）+ 管理员密码</td></tr>
+            <tr><td>转 PDF</td><td>本机装有 Microsoft Edge（或 Chromium）</td></tr>
+          </table>
+
+          <h2 id="install">下载与安装</h2>
+          <h3>macOS</h3>
+          <ol>
+            <li>从网盘下载 <code>ChatVault-0.1.0-macos-arm64.zip</code>，解压得到 <code>ChatVault.app</code></li>
+            <li>拖进「应用程序」文件夹</li>
+            <li>首次打开会被 Gatekeeper 拦（提示「无法验证开发者」或「已损坏」），打开终端执行一次：</li>
+          </ol>
+          <pre><code>xattr -cr /Applications/ChatVault.app</code></pre>
+          <p>也可以右键点 App → 选「打开」→ 再点「打开」，效果一样。安装包没有 Apple 开发者签名，这一步躲不掉。</p>
+
+          <h3>Windows</h3>
+          <ol>
+            <li>解压网盘里的 Windows 包，双击 <code>ChatVault.exe</code></li>
+            <li>SmartScreen 提示「Windows 已保护你的电脑」→ 点「更多信息」→「仍要运行」</li>
+            <li>需要 WebView2 运行时，Win10 1803 以后一般自带</li>
+          </ol>
+
+          <h2 id="account">选择账号</h2>
+          <p>打开软件后，首页会列出本机登录过的微信账号。显示的是<strong>昵称</strong>，不是 <code>wxid_xxx</code> 这种内部标识——有数据库密钥后会从 <code>contact.db</code> 读出真实昵称并缓存，还没有密钥时显示「微信账号 · 89bb」这样的中性名字。</p>
+
+          <h2 id="key">获取数据库密钥</h2>
+          <p>微信 4.x 的数据库是 SQLCipher 加密的，必须先拿到密钥才能解密。三种方式：</p>
+          <h3>1. 自动获取（推荐，macOS）</h3>
+          <ol>
+            <li>选中账号 → 勾选「先重启微信」</li>
+            <li>点「自动获取密钥」，系统会弹管理员授权框，输入密码</li>
+            <li>工具会重启微信、在 <code>CCKeyDerivationPBKDF</code> 下断点抄下口令与 salt，校验通过后自动写进配置并开始解密</li>
+          </ol>
+          <div class="note"><b>为什么必须输密码：</b>微信是 hardened runtime 且没有 <code>get-task-allow</code>，普通用户身份附加进程一定失败。抓取只在本机内存里读一次，不落盘、不上传。</div>
+
+          <h3>2. 命令行（适合排查）</h3>
+          <pre><code>sudo ./ChatVault.app/Contents/MacOS/ChatVault --capture-keys \
+  --pid $(pgrep -f 'WeChat.app/Contents/MacOS/WeChat') \
+  --out ~/cv-key.json</code></pre>
+
+          <h3>3. 导入已有密钥</h3>
+          <p>如果之前用别的工具取过密钥，直接在面板里粘贴 hex 即可，不用重复抓。</p>
+
+          <h2 id="source">切换数据来源</h2>
+          <p>macOS 的 TCC 不允许一个 App 读另一个 App 的容器目录，所以「数据来源」有两个选项：</p>
+          <table>
+            <tr><th>选项</th><th>需要什么</th><th>说明</th></tr>
+            <tr><td>自动读取微信目录（默认）</td><td>「完全磁盘访问权限」</td><td>系统设置 → 隐私与安全性 → 完全磁盘访问权限 → 勾上 ChatVault → 退出并重新打开</td></tr>
+            <tr><td>自定义目录</td><td>不需要授权</td><td>指向任意含 <code>wxid_*/db_storage</code> 的目录，例如从别的机器拷来的 <code>xwechat_files</code></td></tr>
+          </table>
+          <p>切换来源会清空已保存的数据库密钥（密钥按账号保存），需要重新获取或导入。</p>
+
+          <h2 id="export">勾选会话导出</h2>
+          <ol>
+            <li>选中账号 → 密钥通过后进入会话列表</li>
+            <li>按人、按群勾选要导出的会话</li>
+            <li>选格式、选时间段（会员可自定范围）</li>
+            <li>需要转写语音就打开「语音转文字」（会员功能）</li>
+            <li>点导出，进度条走完自动打开输出目录</li>
+          </ol>
+          <pre><code>李老师_聊天记录/
+├── index.html          ← 双击就能看
+├── media/
+│   ├── voice_0041.mp3
+│   ├── img_0087.jpg
+│   └── avatar_li.jpg
+├── 联系人信息.csv
+└── 李老师_聊天记录.pdf</code></pre>
+
+          <h2 id="formats">七种格式</h2>
+          <table>
+            <tr><th>格式</th><th>适合</th><th>说明</th></tr>
+            <tr><td><code>txt</code></td><td>贴到别处</td><td>纯文本，最通用</td></tr>
+            <tr><td><code>md</code></td><td>写笔记、进知识库</td><td>Markdown，可导入 Obsidian / Notion</td></tr>
+            <tr><td><code>json</code></td><td>二次开发、分析</td><td>结构化，含发送者、时间、类型</td></tr>
+            <tr><td><code>csv</code></td><td>丢进表格</td><td>一行一条，UTF-8 BOM 编码</td></tr>
+            <tr><td><code>xlsx</code></td><td>做统计、给同事看</td><td>Excel 工作簿</td></tr>
+            <tr><td><code>html</code></td><td>发给别人看</td><td>带搜索、图片、语音，最完整</td></tr>
+            <tr><td><code>pdf</code></td><td>打印、存档</td><td>由 HTML 排版后转，需要本机 Edge</td></tr>
+          </table>
+
+          <h2 id="asr">语音转文字</h2>
+          <p>引擎是 whisper.cpp，随 App 一起打包，<strong>不上传、不按次收费</strong>。</p>
+          <ul>
+            <li>模型 <code>ggml-small-q5_1.bin</code>，181 MB，首次点「下载语音模型」时下载到 <code>~/Library/Application Support/ChatVault/models/</code></li>
+            <li>转写结果会写进 HTML / PDF 导出文件，语音气泡下面多一行文字</li>
+            <li>免费版此开关不可用，会提示开通会员</li>
+          </ul>
+
+          <h2 id="license">权限码激活</h2>
+          <ol>
+            <li>点右上角「开通会员」</li>
+            <li>选时长，加微信转账，拿到 <code>CV-XXXXX-XXXXX-XXXXX-XXXXX-XXX</code> 格式的权限码</li>
+            <li>把权限码粘进弹窗底部的输入框，点「激活」</li>
+          </ol>
+          <p>权限码是 HMAC 签名的离线券，验签在本机完成，不联网。激活后绑定这台电脑的 <code>IOPlatformUUID</code>，拷到别的机器无效。</p>
+
+          <h2 id="faq">常见故障</h2>
+          <h3>提示「无法验证开发者」/「App 已损坏」</h3>
+          <p>执行 <code>xattr -cr /Applications/ChatVault.app</code>。这是没有 Apple 开发者证书的正常现象。</p>
+          <h3>扫不到微信账号</h3>
+          <p>macOS：确认已给「完全磁盘访问权限」并<strong>重启过 App</strong>；或者改用「自定义目录」指向 <code>xwechat_files</code>。</p>
+          <h3>图片显示成「[图片]」</h3>
+          <p>老会话的图片用了不同的加密容器，缺图片密钥时只能显示占位。文字和语音不受影响。</p>
+          <h3>导出 PDF 失败</h3>
+          <p>转 PDF 依赖本机 Microsoft Edge，装一个再试，或改用 HTML 格式。</p>
+          <h3>激活提示「权限码无效」</h3>
+          <p>三种可能：码抄漏了字符、码已过期（签发超过一年）、这台电脑不是签发时绑定的那台。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__bottom">
+      <span>© 2026 聊天档案</span>
+      <span><a href="legal/terms.html">用户协议</a> · <a href="legal/privacy.html">隐私政策</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/app.js" defer></script>
+</body>
+</html>

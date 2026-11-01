@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>更新日志 · 聊天档案</title>
+<meta name="description" content="聊天档案各版本更新记录。">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://miaoda.feishu.cn" crossorigin>
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .log { max-width: 760px; }
+  .log__item { display: grid; grid-template-columns: 132px 1fr; gap: 28px; padding: 28px 0; border-bottom: 1px solid var(--line); }
+  .log__item:last-child { border-bottom: 0; }
+  .log__ver { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 14px; color: var(--pine-2); font-weight: 600; }
+  .log__date { font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+  .log__tag {
+    display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 999px;
+    background: var(--mint-soft); color: var(--pine-2); margin-bottom: 10px; font-weight: 600;
+  }
+  .log h3 { font-size: 17px; margin: 0 0 12px; }
+  .log ul { margin: 0; padding-left: 20px; }
+  .log li { font-size: 14.5px; line-height: 1.8; color: #3a423f; margin: 5px 0; }
+  .log li b { color: var(--pine-2); font-weight: 600; }
+  @media (max-width: 680px) { .log__item { grid-template-columns: 1fr; gap: 10px; } }
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap nav__inner">
+    <a class="brand" href="index.html">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#d97757" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v18H6.5A2.5 2.5 0 0 1 4 18.5z"/><path d="M8 8h7M8 12h5"/></svg>
+      </span>
+      聊天档案 <span class="brand__sub">CHATVAULT</span>
+    </a>
+    <nav class="nav__links">
+      <a href="index.html#c2">功能</a>
+      <a href="docs.html">文档</a>
+      <a class="btn btn--primary btn--sm nav__cta" href="index.html#c5">免费下载</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="section" style="padding-top:120px">
+    <div class="wrap">
+      <span class="eyebrow"><b>Changelog</b>当前 v0.1.0</span>
+      <h1 style="font-family:var(--serif);font-size:clamp(30px,4vw,42px);margin:16px 0 40px">更新日志</h1>
+
+      <div class="log">
+        <article class="log__item">
+          <div>
+            <div class="log__ver">v0.1.0</div>
+            <div class="log__date">2026-11-01</div>
+          </div>
+          <div>
+            <span class="log__tag">首个公开版本</span>
+            <h3>Windows 与 macOS 都能用了</h3>
+            <ul>
+              <li><b>本地解密</b>：读取微信 4.x 的 SQLCipher 数据库，macOS 支持一键自动取密钥（lldb 断点抓 <code>CCKeyDerivationPBKDF</code> 口令），Windows 沿用进程扫描方案。</li>
+              <li><b>七种导出格式</b>：TXT、Markdown、JSON、CSV、Excel、HTML、PDF。</li>
+              <li><b>HTML 归档</b>：图片、语音、表情、引用回复原样还原，自带搜索框。</li>
+              <li><b>本地语音转文字</b>：内置 whisper.cpp，181 MB 模型，不上传、不按次收费。</li>
+              <li><b>多账号</b>：自动扫描本机登录过的微信账号，显示昵称而非 wxid。</li>
+              <li><b>离线权限码</b>：HMAC 签名，本机验签，绑定 IOPlatformUUID。</li>
+              <li><b>隐私加固</b>：只监听 127.0.0.1、随机端口、一次性令牌；移除更新检查与遥测。</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="log__item">
+          <div>
+            <div class="log__ver">v0.1.0-beta</div>
+            <div class="log__date">2026-10-18</div>
+          </div>
+          <div>
+            <span class="log__tag">内测</span>
+            <h3>先跑通链路</h3>
+            <ul>
+              <li>完成数据库解密与消息解析内核。</li>
+              <li>新界面跑通「选账号 → 取密钥 → 勾会话 → 导出」全流程。</li>
+              <li>修复群聊里同名成员无法区分的问题。</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <p style="margin-top:48px;font-size:13.5px;color:var(--muted)">
+        想提需求或报 bug？加微信 <b>wxid_kvni9uk7qnlc12</b>，说明版本号与复现步骤。
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__bottom">
+      <span>© 2026 聊天档案</span>
+      <span><a href="legal/terms.html">用户协议</a> · <a href="legal/privacy.html">隐私政策</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/app.js" defer></script>
+</body>
+</html>
