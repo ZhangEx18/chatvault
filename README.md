@@ -16,4 +16,4 @@ python3 -m http.server 8000
 
 ## 更新
 
-本站由 `WeChat_html` 仓库的 `scripts/build_github.py` 生成，不要直接改这里的文件。
+本站由 `ChatVault/HTML` 仓库的 `scripts/build_github.py` 生成，不要直接改这里的文件。
