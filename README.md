@@ -1,4 +1,4 @@
-# 墨册 ChatVault · 官网
+# ChatVault · 官网
 
 微信聊天记录归档工具的官方网站。纯静态页面，托管在 GitHub Pages。
 

@@ -23,7 +23,7 @@
       聊天档案 <span>CHATVAULT</span>
     </a>
     <div class="topbar__right">
-      <span class="topbar__ver">v0.1.0</span>
+      <span class="topbar__ver">v0.1.2</span>
       <a class="topbar__link" href="docs.html">文档</a>
       <a class="topbar__btn" href="#c5">下载</a>
     </div>
@@ -101,7 +101,7 @@
         <thead><tr><th>格式</th><th>拿来做什么</th><th>说明</th></tr></thead>
         <tbody>
           <tr><td><code>html</code></td><td>发给别人看</td><td>带搜索框、图片、语音，最完整的一种</td></tr>
-          <tr><td><code>pdf</code></td><td>打印、存档</td><td>由 HTML 排版后转，需要本机装有 Edge</td></tr>
+          <tr><td><code>pdf</code></td><td>打印、存档</td><td>由 HTML 排版后转；macOS 用系统 WebKit，Windows 需要 Edge 或 Chromium</td></tr>
           <tr><td><code>xlsx</code></td><td>做统计、给同事</td><td>一行一条消息的 Excel 工作簿</td></tr>
           <tr><td><code>csv</code></td><td>丢进表格或数据库</td><td>UTF-8 BOM 编码，Excel 打开不乱码</td></tr>
           <tr><td><code>json</code></td><td>二次开发</td><td>结构化，含发送者、时间、消息类型</td></tr>
@@ -121,7 +121,7 @@
         </li>
         <li>
           <b>取数据库密钥</b>
-          <p>macOS 可以一键自动获取，会弹一次管理员密码（微信是 hardened runtime，没有管理员授权附加不进去）。也可以粘贴已有密钥，或者指向另一台机器拷来的数据目录。</p>
+          <p>macOS 可以一键自动获取：App 会复制一份微信、注入抓取组件并打开副本，需要你在手机上确认登录；不会修改原微信，也不需要管理员密码。也可以粘贴已有密钥，或者指向另一台机器拷来的数据目录。</p>
         </li>
         <li>
           <b>勾会话，导出</b>
@@ -184,7 +184,7 @@
         </details>
         <details>
           <summary>免费版能用到什么程度？</summary>
-          <p>每个会话最近 300 条，七种格式都能用，不限时间。语音转文字点了会提示开通会员。</p>
+          <p>每个会话最近 300 条，免费版开放 TXT / CSV；会员解锁七种格式、自定时间范围和语音转文字。</p>
         </details>
         <details>
           <summary>语音转文字调用哪个接口？</summary>

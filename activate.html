@@ -92,8 +92,8 @@
 
           <h2 id="what">权限码是什么</h2>
           <p>一串这个格式的字符：</p>
-          <pre><code>CV-7K3M2-QP9XA-4RTWD-8HN5C-2VJ</code></pre>
-          <p>它是<strong>离线券</strong>——用 HMAC 签过名，软件本地就能验真伪，不需要联网，也不需要登录账号。激活后绑定这台电脑的 <code>IOPlatformUUID</code>。</p>
+          <pre><code>base64url(payload).base64url(ed25519_signature)</code></pre>
+          <p>它是<strong>离线 token</strong>——用 Ed25519 签名，软件本地就能验真伪，不需要联网，也不需要登录账号。token 绑定这台电脑的 <code>IOPlatformUUID</code>。</p>
 
           <h2 id="get">怎么拿到</h2>
           <ol>
@@ -126,7 +126,7 @@
             <tr><th>提示</th><th>原因</th><th>怎么办</th></tr>
             <tr><td>权限码格式不正确</td><td>抄漏字符 / 多了空格</td><td>整串重新复制，别手打</td></tr>
             <tr><td>权限码无效</td><td>签名对不上，可能是伪造或改过</td><td>找发码的人核对</td></tr>
-            <tr><td>权限码已过期</td><td>签发超过一年，或已经到期</td><td>重新购买</td></tr>
+            <tr><td>权限 token 已过期</td><td>超过 token 的到期时间</td><td>重新购买</td></tr>
             <tr><td>与本机不匹配</td><td>码是给另一台电脑签的</td><td>联系补发</td></tr>
           </table>
 

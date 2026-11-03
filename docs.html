@@ -94,15 +94,14 @@
             <tr><td>操作系统</td><td>Windows 10 1803+ / Windows 11；macOS 12 Monterey 及以上（Apple 芯片）</td></tr>
             <tr><td>微信</td><td>微信 4.x 桌面版（Windows / macOS），且已在这台电脑上登录过</td></tr>
             <tr><td>磁盘</td><td>程序约 200 MB；语音模型 181 MB（可选）；导出体积取决于聊天量</td></tr>
-            <tr><td>macOS 取密钥</td><td>Xcode Command Line Tools（提供 <code>lldb</code>）+ 管理员密码</td></tr>
-            <tr><td>转 PDF</td><td>本机装有 Microsoft Edge（或 Chromium）</td></tr>
+            <tr><td>macOS 取密钥</td><td>无需 <code>lldb</code>，也无需管理员密码；需要你在微信副本里完成一次手机登录确认</td></tr>
+            <tr><td>转 PDF</td><td>macOS 使用系统 WebKit；Windows 需要 Microsoft Edge 或 Chromium</td></tr>
           </table>
 
           <h2 id="install">下载与安装</h2>
           <h3>macOS</h3>
           <ol>
-            <li>从网盘下载 <code>ChatVault-0.1.0-macos-arm64.zip</code>，解压得到 <code>ChatVault.app</code></li>
-            <li>拖进「应用程序」文件夹</li>
+            <li>从网盘下载 <code>ChatVault-0.1.2-macos-arm64.dmg</code>，打开后把 <code>ChatVault.app</code> 拖进「应用程序」</li>
             <li>首次打开会被 Gatekeeper 拦（提示「无法验证开发者」或「已损坏」），打开终端执行一次：</li>
           </ol>
           <pre><code>xattr -cr /Applications/ChatVault.app</code></pre>
@@ -171,8 +170,9 @@
             <tr><td><code>csv</code></td><td>丢进表格</td><td>一行一条，UTF-8 BOM 编码</td></tr>
             <tr><td><code>xlsx</code></td><td>做统计、给同事看</td><td>Excel 工作簿</td></tr>
             <tr><td><code>html</code></td><td>发给别人看</td><td>带搜索、图片、语音，最完整</td></tr>
-            <tr><td><code>pdf</code></td><td>打印、存档</td><td>由 HTML 排版后转，需要本机 Edge</td></tr>
+            <tr><td><code>pdf</code></td><td>打印、存档</td><td>由 HTML 排版后转；macOS 用系统 WebKit，Windows 需要 Edge 或 Chromium</td></tr>
           </table>
+          <p><strong>免费版</strong>开放 TXT / CSV；Markdown、Excel、HTML、JSON、PDF 为会员格式。</p>
 
           <h2 id="asr">语音转文字</h2>
           <p>引擎是 whisper.cpp，随 App 一起打包，<strong>不上传、不按次收费</strong>。</p>
@@ -185,10 +185,10 @@
           <h2 id="license">权限码激活</h2>
           <ol>
             <li>点右上角「开通会员」</li>
-            <li>选时长，加微信转账，拿到 <code>CV-XXXXX-XXXXX-XXXXX-XXXXX-XXX</code> 格式的权限码</li>
+            <li>选时长，加微信转账，拿到 Ed25519 v2 格式的权限 token</li>
             <li>把权限码粘进弹窗底部的输入框，点「激活」</li>
           </ol>
-          <p>权限码是 HMAC 签名的离线券，验签在本机完成，不联网。激活后绑定这台电脑的 <code>IOPlatformUUID</code>，拷到别的机器无效。</p>
+          <p>权限 token 使用 Ed25519 签名，客户端内置公钥后离线验签，不联网。token 绑定这台电脑的 <code>IOPlatformUUID</code>，拷到别的机器无效。</p>
 
           <h2 id="faq">常见故障</h2>
           <h3>提示「无法验证开发者」/「App 已损坏」</h3>
@@ -198,9 +198,9 @@
           <h3>图片显示成「[图片]」</h3>
           <p>老会话的图片用了不同的加密容器，缺图片密钥时只能显示占位。文字和语音不受影响。</p>
           <h3>导出 PDF 失败</h3>
-          <p>转 PDF 依赖本机 Microsoft Edge，装一个再试，或改用 HTML 格式。</p>
+          <p>macOS 使用系统 WebKit，一般不需要额外安装；Windows 需要 Microsoft Edge 或 Chromium，装一个再试，或改用 HTML 格式。</p>
           <h3>激活提示「权限码无效」</h3>
-          <p>三种可能：码抄漏了字符、码已过期（签发超过一年）、这台电脑不是签发时绑定的那台。</p>
+          <p>三种可能：码抄漏了字符、token 已过期或已被撤销、这台电脑不是签发时绑定的那台。</p>
         </div>
       </div>
     </div>
