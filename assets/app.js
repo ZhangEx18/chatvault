@@ -1,4 +1,4 @@
-/* 聊天档案 ChatVault 官网交互：导航吸顶、复制提取码。无依赖、无构建。 */
+/* 旧页面用的小脚本：复制提取码。首页交互在 site.js。无依赖、无构建。 */
 
 (function () {
   "use strict";
@@ -20,7 +20,7 @@
       var pwd = btn.getAttribute("data-pwd") || "";
       var old = btn.textContent;
       var done = function () {
-        btn.textContent = "已复制 ✓";
+        btn.textContent = "已复制";
         setTimeout(function () { btn.textContent = old; }, 1600);
       };
       var fallback = function () {
@@ -42,8 +42,8 @@
     });
   }
 
-  bindCopy(document.getElementById("copyPwd"));
-  bindCopy(document.getElementById("copyLanzou"));
+  var copyButtons = document.querySelectorAll("[data-pwd]");
+  for (var i = 0; i < copyButtons.length; i++) bindCopy(copyButtons[i]);
 
   /* ---------- 版本号 ---------- */
   fetch("/api/update.json")

@@ -6,67 +6,66 @@
 <title>在线示例 · 聊天档案</title>
 <meta name="description" content="聊天档案导出的聊天记录归档示例：搜索、时间轴、语音转写、图片还原。">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://miaoda.feishu.cn" crossorigin>
-<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap">
 <link rel="stylesheet" href="../assets/style.css">
 <style>
-  .demo-head { padding: 96px 0 8px; }
-  .demo-wrap { max-width: 820px; margin: 0 auto; padding: 0 24px 80px; }
+  .demo-head { padding: 76px 0 8px; max-width: 820px; margin: 0 auto; padding-inline: 24px; }
+  .demo-wrap { max-width: 820px; margin: 0 auto; padding: 0 24px 72px; }
   .demo-search {
     display: flex; align-items: center; gap: 10px;
-    background: var(--card); border: 1px solid var(--line);
-    border-radius: 14px; padding: 12px 16px; margin: 28px 0 8px;
-    box-shadow: 0 1px 2px rgba(22,33,30,.04);
+    background: var(--surface); border-radius: 10px;
+    padding: 13px 16px; margin: 26px 0 10px;
   }
   .demo-search input {
-    flex: 1; border: 0; outline: 0; font: inherit; font-size: 15px;
-    background: transparent; color: var(--text);
+    flex: 1; border: 0; outline: 0; font: inherit; font-size: 16px;
+    background: transparent; color: var(--ink);
   }
   .demo-search svg { width: 18px; height: 18px; color: var(--muted); flex: none; }
-  .demo-count { font-size: 13px; color: var(--muted); margin: 0 0 32px 4px; }
+  .demo-count { font-size: 13px; color: var(--muted); margin: 0 0 30px 2px; }
   .demo-day {
-    text-align: center; margin: 40px 0 22px; font-size: 12.5px;
-    color: var(--muted); letter-spacing: .06em;
+    text-align: center; margin: 38px 0 20px; font-size: 13px;
+    color: var(--muted);
   }
-  .demo-day span { background: var(--paper-2); padding: 5px 14px; border-radius: 999px; }
+  .demo-day span { background: var(--surface-2); padding: 5px 14px; border-radius: 999px; }
   .msg { display: flex; gap: 12px; margin-bottom: 16px; align-items: flex-start; }
   .msg--me { flex-direction: row-reverse; }
   .msg__av {
-    width: 36px; height: 36px; border-radius: 10px; flex: none;
-    display: grid; place-items: center; font-size: 14px; font-weight: 600;
-    background: var(--mint-soft); color: var(--pine-2);
+    width: 36px; height: 36px; border-radius: 9px; flex: none;
+    display: grid; place-items: center; font-size: 16px; font-weight: 600;
+    background: var(--surface-2); color: var(--muted);
   }
-  .msg--me .msg__av { background: var(--pine); color: var(--mint); }
+  .msg--me .msg__av { background: var(--accent); color: var(--accent-ink); }
   .msg__body { max-width: 74%; }
   .msg--me .msg__body { text-align: right; }
-  .msg__name { font-size: 12.5px; color: var(--muted); margin-bottom: 6px; }
+  .msg__name { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
   .msg--me .msg__name { display: none; }
   .msg__text {
-    background: var(--card); border: 1px solid var(--line); border-radius: 4px 14px 14px 14px;
-    padding: 12px 16px; font-size: 15px; line-height: 1.72; white-space: pre-wrap;
+    background: var(--surface); border-radius: 4px 12px 12px 12px;
+    padding: 12px 16px; font-size: 16px; line-height: 1.7; white-space: pre-wrap;
+    color: var(--ink);
   }
   .msg--me .msg__text {
-    background: var(--pine); color: #fbf6f2; border-color: var(--pine);
-    border-radius: 14px 4px 14px 14px;
+    background: #f4f3f1; color: #1b1a19;
+    border-radius: 12px 4px 12px 12px;
   }
-  .msg__text mark { background: #f6e0c8; color: #4a3708; padding: 0 2px; border-radius: 2px; }
-  .msg--me .msg__text mark { background: #f2d675; color: #2a2000; }
-  .msg__time { font-size: 11.5px; color: #8f8a80; margin-top: 6px; }
-  .voice { display: inline-flex; align-items: center; gap: 8px; color: var(--pine-3); font-size: 14px; }
+  .msg__text mark { background: #f0d8d8; color: #7a1220; padding: 0 2px; border-radius: 2px; }
+  .msg--me .msg__text mark { background: #f5dfe0; color: #6d101c; }
+  .msg__time { font-size: 13px; color: var(--muted); margin-top: 6px; }
+  .voice { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); font-size: 16px; }
   .asr {
-    display: block; margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--line);
-    font-size: 13.5px; color: var(--muted);
+    display: block; margin-top: 10px; padding-top: 10px;
+    font-size: 16px; color: var(--muted);
+    
   }
+  .msg--me .asr { border-top-color: #d9d5cf; color: #5f5b54; }
   .img-ph {
-    width: 210px; height: 140px; border-radius: 10px;
-    background: repeating-linear-gradient(45deg, #e9e5d8, #e9e5d8 8px, #f2efe6 8px, #f2efe6 16px);
-    display: grid; place-items: center; font-size: 12px; color: #8f8a80;
-    border: 1px solid var(--line);
+    width: 210px; height: 140px; border-radius: 8px;
+    background: var(--surface-2);
+    display: grid; place-items: center; font-size: 13px; color: var(--muted);
   }
   .msg--me .img-ph { margin-left: auto; }
   .demo-foot {
-    margin-top: 56px; padding: 24px; border: 1px dashed var(--line-strong);
-    border-radius: 14px; font-size: 13.5px; color: var(--muted); text-align: center;
+    margin-top: 48px; padding: 22px; border-radius: 12px; background: var(--surface);
+    font-size: 16px; color: var(--muted); text-align: center; line-height: 1.8;
   }
 </style>
 </head>
@@ -76,15 +75,15 @@
   <div class="wrap nav__inner">
     <a class="brand" href="../index.html">
       <span class="brand__mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#d97757" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v18H6.5A2.5 2.5 0 0 1 4 18.5z"/><path d="M8 8h7M8 12h5"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v18H6.5A2.5 2.5 0 0 1 4 18.5z"/><path d="M8 8h7M8 12h5"/></svg>
       </span>
-      聊天档案 <span class="brand__sub">CHATVAULT</span>
+      聊天档案 <span class="brand__sub">ChatVault</span>
     </a>
     <nav class="nav__links">
-      <a href="../index.html#features">功能</a>
-      <a href="../index.html#pricing">定价</a>
+      <a href="../index.html#c2">功能</a>
+      <a href="../index.html#c6">会员</a>
       <a href="../docs.html">文档</a>
-      <a class="btn btn--primary btn--sm nav__cta" href="../index.html#c5">免费下载</a>
+      <a class="btn btn--primary btn--sm nav__cta" href="../index.html#c7">免费下载</a>
     </nav>
   </div>
 </header>
@@ -92,7 +91,6 @@
 <main>
   <div class="demo-wrap">
     <div class="demo-head">
-      <span class="eyebrow"><b>示例</b>脱敏后的真实归档</span>
       <h1 style="font-size:clamp(28px,4vw,40px);margin:16px 0 12px">李老师_聊天记录</h1>
       <p style="color:var(--muted);font-size:15px;margin:0">
         1 842 条消息 · 63 张图片 · 21 条语音 · 2023-04-12 至 2026-10-15
@@ -151,7 +149,7 @@
         <span class="msg__av">李</span>
         <div class="msg__body">
           <div class="msg__name">李老师</div>
-          <div class="msg__text"><span class="voice">🔊 语音 8″</span><span class="asr">🗣 把配色换成墨青更搭，合同那份也一起改</span></div>
+          <div class="msg__text"><span class="voice"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 6v4M6 3v10M9 5v6M12 6v4"/></svg> 语音 8″</span><span class="asr">把配色换成墨青更搭，合同那份也一起改</span></div>
           <div class="msg__time">10:07</div>
         </div>
       </div>
@@ -217,7 +215,7 @@
     <div class="demo-foot">
       这是聊天档案导出的归档结构，只是把真实聊天换成了示例内容。<br>
       你自己的导出结果会包含完整图片、可播放语音与统计页。
-      <div style="margin-top:16px"><a class="btn btn--ghost btn--sm" href="../index.html#c5">下载聊天档案 →</a></div>
+      <div style="margin-top:16px"><a class="btn btn--ghost btn--sm" href="../index.html#c7">下载聊天档案 →</a></div>
     </div>
   </div>
 </main>

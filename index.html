@@ -4,230 +4,493 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>聊天档案 ChatVault · 微信聊天记录导出工具</title>
-<meta name="description" content="把微信 4.x 的聊天记录导出成 HTML、PDF、Excel、CSV、JSON、Markdown、TXT 七种格式。本地解密、语音本地转写、数据不上传，Windows 与 macOS 都能用。">
-<meta name="theme-color" content="#1f1e1d">
+<meta name="description" content="把微信 4.x 的聊天记录导出成 HTML、PDF、Excel、CSV、JSON、Markdown、TXT 七种格式。本地解密、本地语音转写、数据不上传，Windows 与 macOS 都能用。">
+<meta name="theme-color" content="#0b0b0c">
 <meta property="og:type" content="website">
 <meta property="og:title" content="聊天档案 ChatVault · 微信聊天记录导出工具">
 <meta property="og:description" content="你的聊天记录，应该能带得走。">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://miaoda.feishu.cn" crossorigin>
-<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=20261108-2">
+<link rel="stylesheet" href="assets/style.css?v=20261108-4">
 </head>
-<body class="dossier">
+<body>
 
-<header class="topbar">
-  <div class="topbar__in">
-    <a class="topbar__brand" href="#top">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#d97757" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v18H6.5A2.5 2.5 0 0 1 4 18.5z"/><path d="M8 8h7M8 12h5"/></svg>
-      聊天档案 <span>CHATVAULT</span>
+<header class="nav" id="nav">
+  <div class="wrap nav__inner">
+    <a class="brand" href="index.html">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v18H6.5A2.5 2.5 0 0 1 4 18.5z"/><path d="M8 8h7M8 12h5"/></svg>
+      </span>
+      聊天档案 <span class="brand__sub">ChatVault v1.3.0</span>
     </a>
-    <div class="topbar__right">
-      <span class="topbar__ver">v0.1.2</span>
-      <a class="topbar__link" href="docs.html">文档</a>
-      <a class="topbar__btn" href="#c5">下载</a>
-    </div>
+    <nav class="nav__links">
+      <a href="#c2">功能</a>
+      <a href="docs.html">文档</a>
+      <a href="#c6">会员</a>
+      <a class="btn btn--primary btn--sm nav__cta" href="#c7">下载</a>
+    </nav>
   </div>
 </header>
 
-<main id="top">
+<main>
 
-<!-- ============ 封面 ============ -->
-<section class="cover">
-  <div class="cover__in">
-    <p class="cover__kicker">微信聊天记录导出工具 · 本地运行</p>
-    <h1 class="cover__title">你的聊天记录，<br>应该能带得走。</h1>
-    <p class="cover__sub">
-      微信把聊天存在本地一个加密数据库里，需要数据库密钥才能解密。
-      聊天档案把这个库读出来，导出成能搜索、能打印、能发给别人的文件——聊天数据的解密和导出都在你自己的电脑上完成。
-    </p>
-    <dl class="cover__spec">
-      <div><dt>支持</dt><dd>微信 4.x 桌面版</dd></div>
-      <div><dt>系统</dt><dd>Windows 10+ / macOS 11+</dd></div>
-      <div><dt>格式</dt><dd>7 种</dd></div>
-      <div><dt>免费版</dt><dd>单会话 300 条</dd></div>
-    </dl>
+<!-- 首屏：左边说一句话，右边就是这个软件正在导出 -->
+<div class="opening">
+  <div class="opening__say">
+    <h1 class="opening__title">
+      <span><i>你的聊天记录，</i></span>
+      <span><i>应该能带得走。</i></span>
+    </h1>
+    <p>微信把聊天存在本机一个 SQLCipher 数据库里，没有密钥打不开。聊天档案把库读出来，写成能搜索、能打印、能发给别人的文件。解密和导出都在这台电脑上完成。</p>
+    <div class="opening__acts">
+      <a class="btn btn--primary" href="#c7">下载安装包</a>
+      <a class="btn btn--ghost" href="demo/index.html">看一份导出结果</a>
+    </div>
+    <div class="opening__meta">
+      <span>微信 4.x 桌面版</span>
+      <span>Windows 10+ / macOS 11+</span>
+      <span>七种格式</span>
+      <span>免费版单会话 300 条</span>
+    </div>
+  </div>
+
+  <div class="opening__stage">
+    <!-- 这块是真的能点的：勾会话、选格式、按导出，拿到的是真实文件 -->
+    <div class="console" id="console" data-ui>
+      <div class="console__head">
+        <b>导出</b>
+        <span>账号 0.0! · 已解密</span>
+      </div>
+      <div class="console__rows">
+        <div class="console__row" data-on="1" data-session="xiaoA" data-count="3" role="switch" tabindex="0" aria-checked="true">
+          <span class="tick" aria-hidden="true"><svg viewBox="0 0 12 12" width="11" height="11" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M2.2 6.4 4.9 9 9.8 3.6"/></svg></span>
+          <span class="who"><b>小A</b><small>好友 · 2025-01-01</small></span>
+          <span class="num">3 条</span>
+        </div>
+        <div class="console__row" data-on="1" data-session="bob" data-count="1" role="switch" tabindex="0" aria-checked="true">
+          <span class="tick" aria-hidden="true"><svg viewBox="0 0 12 12" width="11" height="11" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M2.2 6.4 4.9 9 9.8 3.6"/></svg></span>
+          <span class="who"><b>Bob</b><small>好友 · 2025-01-01</small></span>
+          <span class="num">1 条</span>
+        </div>
+        <div class="console__row" data-on="0" data-session="stranger" data-count="1" role="switch" tabindex="0" aria-checked="false">
+          <span class="tick" aria-hidden="true"><svg viewBox="0 0 12 12" width="11" height="11" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M2.2 6.4 4.9 9 9.8 3.6"/></svg></span>
+          <span class="who"><b>陌生人</b><small>陌生人 · 2025-01-01</small></span>
+          <span class="num">1 条</span>
+        </div>
+      </div>
+      <div class="console__formats" id="formats">
+        <button type="button" data-fmt="html" aria-pressed="true">HTML</button>
+        <button type="button" data-fmt="pdf" aria-pressed="false">PDF</button>
+        <button type="button" data-fmt="xlsx" aria-pressed="false">Excel</button>
+        <button type="button" data-fmt="json" aria-pressed="false">JSON</button>
+        <button type="button" data-fmt="md" aria-pressed="false">Markdown</button>
+        <button type="button" data-fmt="csv" aria-pressed="false">CSV<em>免费</em></button>
+        <button type="button" data-fmt="txt" aria-pressed="false">TXT<em>免费</em></button>
+      </div>
+      <div class="console__foot">
+        <div class="console__bar" aria-hidden="true"><i id="bar"></i></div>
+        <div class="console__go">
+          <span id="consoleState">已选 2 个会话 · 4 条消息</span>
+          <button type="button" id="runExport">导出</button>
+        </div>
+        <div class="console__result" id="result" data-state="idle" aria-live="polite">
+          <span class="done" hidden id="doneBox">
+            <span class="line">
+              <b id="doneMsg">导出完成</b>
+              <span id="doneSize"></span>
+              <span id="doneHash"></span>
+            </span>
+            <a id="doneLink" href="assets/formats/sample.html" target="_blank" rel="noopener">打开这份归档</a>
+            <span id="scaleNote" hidden>这里只放了小A这一份示例文件；软件里勾几个会话，就会按会话分别生成。</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 会话看板 -->
+<section class="board" id="c1">
+  <div class="wrap">
+    <div class="board__head">
+      <h2>会话列表，<br>就是导出入口</h2>
+      <p>按人、按群勾选，选一个格式，剩下的交给任务中心。列表里显示的是昵称和备注，不是 wxid。</p>
+    </div>
+    <div class="board__rows" data-ui>
+      <div class="board__row">
+        <span class="name">小A<small>wxid_alice · 备注「同事」</small></span>
+        <span class="fact">好友</span>
+        <span class="fact">3 条消息</span>
+        <span class="fact">2025-01-01 08:00</span>
+        <span class="tag">已找到</span>
+      </div>
+      <div class="board__row">
+        <span class="name">Bob<small>wxid_bob</small></span>
+        <span class="fact">好友</span>
+        <span class="fact">1 条消息</span>
+        <span class="fact">2025-01-01 08:01</span>
+        <span class="tag">已找到</span>
+      </div>
+      <div class="board__row">
+        <span class="name">产品讨论组<small>群聊 · 9 人</small></span>
+        <span class="fact">群聊</span>
+        <span class="fact">1842 条消息</span>
+        <span class="fact">2026-10-15 17:03</span>
+        <span class="tag">已找到</span>
+      </div>
+      <div class="board__open">
+        <span>
+          <b>陌生人 · 未缓存</b>
+          <p>数据还没读过，先点一次刷新或解密，列表会把最近一条消息和消息数补齐。</p>
+        </span>
+        <span class="crop">
+          <span>1 条消息 · 2025-01-01 08:03</span>
+          <span>状态：未缓存 → 读取中 → 已找到</span>
+          <span>失败时给出原因，可重试或跳过</span>
+        </span>
+      </div>
+      <div class="board__row">
+        <span class="name">李老师<small>wxid_lilaoshi</small></span>
+        <span class="fact">好友</span>
+        <span class="fact">1806 条消息</span>
+        <span class="fact">2026-10-14 10:07</span>
+        <span class="tag">部分完成</span>
+      </div>
+    </div>
+    <figure class="run-film">
+      <video src="assets/app/export-run.mp4" poster="assets/app/03-tasks.jpg" muted loop autoplay playsinline preload="metadata" aria-label="真实导出过程：勾选会话、选格式、进度条走完、任务中心出现结果"></video>
+      <figcaption>这是这台机器上录下来的真实导出过程：勾选一个会话、选 PDF、进度条走完，任务中心里出现消息数、字节数和 SHA256。</figcaption>
+    </figure>
+    <p class="board__foot">会话列表里的名字来自测试账号，内容为示例数据。你打开软件看到的是自己账号的真实会话。</p>
   </div>
 </section>
 
-<!-- ============ 正文双栏 ============ -->
-<div class="layout">
-  <aside class="rail">
-    <div class="rail__sticky">
-      <nav class="rail__nav" aria-label="目录">
-        <a href="#c1"><i>01</i>它做什么</a>
-        <a href="#c2"><i>02</i>导出什么</a>
-        <a href="#c3"><i>03</i>怎么用</a>
-        <a href="#c4"><i>04</i>隐私</a>
-        <a href="#c5"><i>05</i>下载</a>
-      </nav>
-      <p class="rail__note">遇到问题加微信<br><b>wxid_kvni9uk7qnlc12</b><br>9:00–22:00</p>
+<div class="wrap" id="c2">
+
+  <!-- 七种格式 -->
+  <section class="pair">
+    <div class="pair__say">
+      <h2>七种格式，<br>都是能打开的文件</h2>
+      <p>同一段聊天，导出成七种文件。右边是这台机器上真实导出的结果，点开任何一个都能看到内容，大小和 SHA256 都是文件本身的。</p>
+      <div class="facts">
+        <div><span>同一次导出</span><b>小A · 3 条消息 · 2025-01-01</b></div>
+        <div><span>HTML 归档</span><b>2,741 字节 · 含 media 目录</b></div>
+        <div><span>PDF</span><b>18,348 字节 · 系统 WebKit 渲染</b></div>
+      </div>
     </div>
-  </aside>
-
-  <div class="body">
-
-    <!-- 01 -->
-    <section class="chapter" id="c1">
-      <header class="chapter__head"><span>01</span><h2>它做什么</h2></header>
-      <p class="chapter__lede">
-        打开软件，先看到的是这台电脑上登录过的微信账号。选一个、取到数据库密钥，会话列表就出来了——
-        按人按群勾选，选个格式，剩下的交给进度条。导出的每个会话是一个独立文件夹，里面有网页、图片、语音和一张联系人表。
-      </p>
-
-      <div class="tree">
-        <div class="tree__head">李老师_聊天记录 /</div>
-        <pre><code>├── index.html                 1.8 MB
-├── media/
-│   ├── voice_0041.mp3
-│   ├── img_0087.jpg
-│   └── avatar_li.jpg</code></pre>
-        <p class="tree__cap">这是 HTML 导出的示意结构。选择 PDF 会另外生成 PDF 文件，联系人信息 CSV 需要单独导出。</p>
+    <div class="formats" data-ui id="formatList">
+      <div class="format">
+        <div class="format__preview"><img src="assets/formats/sample.html.png" alt="HTML 归档的第一屏" loading="lazy" width="900" height="1200"></div>
+        <div class="format__name"><b>HTML</b><small data-fmt-meta="html">2,741 字节 · SHA256 cf432fbb…</small></div>
+        <a href="assets/formats/sample.html" target="_blank" rel="noopener">打开</a>
       </div>
-
-      <ul class="points">
-        <li><b>准备完成后可以离线导出</b>　解密、解析、渲染全在本机，飞机上也能用。</li>
-        <li><b>图片和语音是真的图片和语音</b>　不是「[图片]」占位，文件都在 media 目录里。</li>
-        <li><b>一个会话一个文件夹</b>　整个目录压缩发给别人，对方双击就能看。</li>
-      </ul>
-    </section>
-
-    <!-- 02 -->
-    <section class="chapter" id="c2">
-      <header class="chapter__head"><span>02</span><h2>导出什么</h2></header>
-      <p class="chapter__lede">同一个会话可以导出成七种文件，按你要拿它干什么来选。</p>
-
-      <table class="spec">
-        <thead><tr><th>格式</th><th>拿来做什么</th><th>说明</th></tr></thead>
-        <tbody>
-          <tr><td><code>html</code></td><td>发给别人看</td><td>带搜索框、图片、语音，最完整的一种</td></tr>
-          <tr><td><code>pdf</code></td><td>打印、存档</td><td>由 HTML 排版后转；macOS 用系统 WebKit，Windows 需要 Edge 或 Chromium</td></tr>
-          <tr><td><code>xlsx</code></td><td>做统计、给同事</td><td>一行一条消息的 Excel 工作簿</td></tr>
-          <tr><td><code>csv</code></td><td>丢进表格或数据库</td><td>UTF-8 BOM 编码，Excel 打开不乱码</td></tr>
-          <tr><td><code>json</code></td><td>二次开发</td><td>结构化，含发送者、时间、消息类型</td></tr>
-          <tr><td><code>md</code></td><td>进笔记软件</td><td>Markdown，可导入 Obsidian / Notion</td></tr>
-          <tr><td><code>txt</code></td><td>贴到别处</td><td>纯文本，最通用</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- 03 -->
-    <section class="chapter" id="c3">
-      <header class="chapter__head"><span>03</span><h2>怎么用</h2></header>
-      <ol class="steps">
-        <li>
-          <b>选账号</b>
-          <p>面板列出本机登录过的微信账号，显示的是昵称。点一个。</p>
-        </li>
-        <li>
-          <b>取数据库密钥</b>
-          <p>macOS 可以一键自动获取：App 会复制一份微信、注入抓取组件并打开副本，需要你在手机上确认登录；不会修改原微信，也不需要管理员密码。也可以粘贴已有密钥，或者指向另一台机器拷来的数据目录。</p>
-        </li>
-        <li>
-          <b>勾会话，导出</b>
-          <p>按人、按群勾选，选格式，要转语音就打开开关。进度条走完自动打开输出文件夹。</p>
-        </li>
-      </ol>
-
-      <div class="callout">
-        <b>macOS 第一次打开会被拦。</b>
-        安装包没有 Apple 开发者证书，系统会提示「无法验证开发者」或「已损坏」。
-        打开终端执行一次 <code>xattr -cr /Applications/ChatVault.app</code> 就好，以后不再提示。
+      <div class="format">
+        <div class="format__preview"><img src="assets/format-vis/小A_2026-11-08_22-09-15.pdf.png" alt="PDF 导出的第一页" loading="lazy" width="1100" height="1420"></div>
+        <div class="format__name"><b>PDF</b><small data-fmt-meta="pdf">18,348 字节 · SHA256 e211188cc7…</small></div>
+        <a href="assets/formats/sample.pdf" target="_blank" rel="noopener">打开</a>
       </div>
-    </section>
+      <div class="format">
+        <div class="format__preview"><img src="assets/format-vis/小A_聊天记录.xlsx.png" alt="Excel 导出预览" loading="lazy" width="1100" height="1420"></div>
+        <div class="format__name"><b>Excel</b><small data-fmt-meta="xlsx">5,232 字节 · SHA256 8d10ea5c4e…</small></div>
+        <a href="assets/formats/sample.xlsx" target="_blank" rel="noopener">打开</a>
+      </div>
+      <div class="format"><div class="format__preview format__preview--text"><pre><code>{
+ &quot;contact&quot;: &quot;小A&quot;,
+ &quot;count&quot;: 3,
+ &quot;messages&quot;: [
+   …]</code></pre></div>
+        <div class="format__name"><b>JSON</b><small data-fmt-meta="json">1,337 字节 · SHA256 cfe4de6842…</small></div>
+        <a href="assets/formats/sample.json" target="_blank" rel="noopener">打开</a>
+      </div>
+      <div class="format"><div class="format__preview format__preview--text"><pre><code># 与 小A 的聊天记录
 
-    <!-- 04 -->
-    <section class="chapter" id="c4">
-      <header class="chapter__head"><span>04</span><h2>隐私</h2></header>
-      <p class="chapter__lede">
-        聊天记录是最私人的数据。聊天内容、数据库密钥、图片和语音不会上传到授权服务器——
-        短码兑换只发送短码和设备指纹。本地服务只监听 <code>127.0.0.1</code>，端口随机，并带一次性令牌，降低同机其他程序访问的风险。
-      </p>
 
-      <table class="spec">
-        <thead><tr><th>动作</th><th>联网情况</th></tr></thead>
-        <tbody>
-          <tr><td>导出、浏览、检索</td><td>准备完成后不请求网络</td></tr>
-          <tr><td>解密数据库</td><td>本地文件读写</td></tr>
-          <tr><td>语音转文字</td><td>本地转写，不上传</td></tr>
-          <tr><td>下载语音模型</td><td>首次使用时联网下载</td></tr>
-          <tr><td>短码激活</td><td>联网发送短码和设备指纹；长 token 可离线激活</td></tr>
-          <tr><td>版本检查 / 遥测</td><td>没有</td></tr>
-        </tbody>
-      </table>
-    </section>
+## 2025-01-01
+</code></pre></div>
+        <div class="format__name"><b>Markdown</b><small data-fmt-meta="md">123 字节 · SHA256 aaa90240ec…</small></div>
+        <a href="assets/formats/sample.md" target="_blank" rel="noopener">打开</a>
+      </div>
+      <div class="format"><div class="format__preview format__preview--text"><pre><code>﻿时间,发送方,类型,内容
+2025-01-01 08:00:00,小A,text,第一条
+2025-01-01 08:00:10,小A,text,第二条
+2025-01-01 08:00:20,小A,image,[图片]</code></pre></div>
+        <div class="format__name"><b>CSV</b><small data-fmt-meta="csv">158 字节 · SHA256 9413e34194…</small></div>
+        <a href="assets/formats/sample.csv" target="_blank" rel="noopener">打开</a>
+      </div>
+      <div class="format">
+        <div class="format__preview"><img src="assets/formats/sample.txt.png" alt="TXT 导出的前几行" loading="lazy" width="900" height="1200"></div>
+        <div class="format__name"><b>TXT</b><small data-fmt-meta="txt">416 字节 · SHA256 8cd6652234…</small></div>
+        <a href="assets/formats/sample.txt" target="_blank" rel="noopener">打开</a>
+      </div>
+    </div>
+  </section>
 
-    <!-- 05 -->
-    <section class="chapter" id="c5">
-      <header class="chapter__head"><span>05</span><h2>下载</h2></header>
-      <p class="chapter__lede">安装包放在网盘，按你的系统选一个。里面是 <b>ChatVault</b> 文件夹。</p>
+  <!-- 语音 -->
+  <section class="pair pair--flip">
+    <div class="pair__say">
+      <h2>语音在本机<br>转成文字</h2>
+      <p>语音消息不发给任何在线接口。macOS 用 SenseVoice，Windows 用 whisper.cpp，模型下载一次，之后断网也能转。</p>
+      <div class="facts">
+        <div><span>macOS 模型</span><b>model.int8.onnx · 229 MiB</b></div>
+        <div><span>词表</span><b>tokens.txt · 312 KB</b></div>
+        <div><span>Windows 模型</span><b>ggml-small-q5_1.bin · 182 MiB</b></div>
+        <div><span>上传</span><b>无</b></div>
+      </div>
+    </div>
+    <div class="speech" data-ui>
+      <div class="speech__head">
+        <b>语音转文字</b>
+        <span>本机 · 已就绪</span>
+      </div>
+      <div class="speech__files">
+        <div><code>model.int8.onnx</code><b>239,233,841 字节</b></div>
+        <div><code>tokens.txt</code><b>315,894 字节</b></div>
+        <div><code>导出/语音/auto_0001.mp3</code><b>8″ → 文字</b></div>
+      </div>
+      <div class="speech__meter" id="meter">
+        <div><span>识别进度</span><span>3 / 3 段</span></div>
+        <div class="bar"><i></i></div>
+        <div><span>写入位置</span><span>HTML · TXT · JSON · Excel</span></div>
+      </div>
+      <p class="speech__note">开启后，导出的文件里每条语音后面多一行「【语音转文字】」，原文和播放器都保留。</p>
+    </div>
+  </section>
 
-      <div class="dl">
-        
-        <div class="dl__row">
-          <div class="dl__plat"><b>百度网盘</b><span>浏览器打开 · 需提取码</span></div>
-          <div class="dl__act">
-            <a class="btn btn--primary btn--sm" href="https://pan.baidu.com/s/1pxNO_D0u1lvqNRkzTZvEmQ?pwd=Chat" target="_blank" rel="noopener">打开百度网盘</a>
-            <button class="btn btn--ghost btn--sm" type="button" id="copyPwd" data-pwd="Chat">复制提取码 Chat</button>
+  <!-- 归档与校验 -->
+  <section class="pair">
+    <div class="pair__say">
+      <h2>归档能加密、<br>能校验、能续传</h2>
+      <p>文件要发给别人，就得能证明没被改过。每次导出都记消息数、文件大小和 SHA256；压缩包超过 1.5 GB 自动分片并生成校验清单。</p>
+      <div class="facts">
+        <div><span>加密</span><b>AES ZIP · 自定义密码</b></div>
+        <div><span>分片阈值</span><b>1.5 GB</b></div>
+        <div><span>校验清单</span><b>SHA256SUMS.txt</b></div>
+        <div><span>断点续传</span><b>失败任务只补剩余会话</b></div>
+      </div>
+    </div>
+    <div class="guard" data-ui>
+      <div class="guard__row"><b>加密压缩</b><p>HTML 连 media 一起打包，密码用 AES 加密；接收方用任意解压工具输入密码即可。</p><span class="val">WZ_AES</span></div>
+      <div class="guard__row"><b>完整性报告</b><p>任务中心直接显示每条结果的实际消息数、字节数和 SHA256 前 12 位。</p><span class="val">消息 3 / 3</span></div>
+      <div class="guard__row"><b>分片归档</b><p>超过阈值的压缩包切成 .part001 等片段，另写一份校验清单，按顺序合并后即可解压。</p><span class="val">1.5 GB</span></div>
+      <div class="guard__row"><b>断点续传</b><p>中断或失败的批量任务，可以在任务中心点「继续」，从剩余会话接着导。</p><span class="val">继续（2）</span></div>
+    </div>
+  </section>
+
+  <!-- 隐私 -->
+  <section class="pair pair--flip" id="c5">
+    <div class="pair__say">
+      <h2>数据不出<br>这台电脑</h2>
+      <p>数据库密钥、聊天内容、图片和语音都留在本机。本地服务只监听 127.0.0.1，端口随机，并带一次性令牌。</p>
+      <div class="facts">
+        <div><span>导出与检索</span><b>准备完成后不联网</b></div>
+        <div><span>语音转写</span><b>本机推理</b></div>
+        <div><span>更新与遥测</span><b>没有</b></div>
+        <div><span>联网的只有</span><b>模型下载 · 短码兑换</b></div>
+      </div>
+    </div>
+    <figure class="shot">
+      <img src="assets/app/06-settings.jpg" alt="设置页：数据来源、缓存占用与隐私说明" loading="lazy" width="1100" height="688">
+      <figcaption>设置页里的数据来源与缓存。完全磁盘访问权限只影响自动读取微信目录；也可以指向拷来的数据目录。</figcaption>
+    </figure>
+  </section>
+
+  <section class="pair">
+    <div class="pair__say">
+      <h2>断网也能<br>把活干完</h2>
+      <p>模型下载完、密钥到手之后，解密、浏览、检索、导出全部离线完成。导出结果是一整个文件夹，压缩发给别人，对方双击就能看。</p>
+    </div>
+    <figure class="shot shot--drift">
+      <img src="assets/app/01-home.jpg" alt="首页：数据来源、账号与密钥、准备状态" loading="lazy" width="1100" height="688">
+      <figcaption>首页把四件事摆在明面上：数据来源、账号与密钥、准备状态、导出入口。</figcaption>
+    </figure>
+  </section>
+
+  <!-- 怎么用 -->
+  <section class="section" id="c3">
+    <h2 style="font-size:var(--step-h2);margin-bottom:44px">四步拿到归档</h2>
+    <ol class="steps">
+      <li>
+        <b>选账号</b>
+        <p>列出本机登录过的微信账号，显示昵称。没密钥时先显示「微信账号 · 0a1b」这样的中性名字。</p>
+      </li>
+      <li>
+        <b>取密钥</b>
+        <p>macOS 可以自动取：复制一份微信、注入抓取组件、打开副本，需要手机确认一次，原微信不被修改。也可以粘贴已有密钥或指向拷来的目录。</p>
+      </li>
+      <li>
+        <b>勾会话、选格式</b>
+        <p>按人按群勾选，选七种格式之一。要转文字就开开关，也能设时间范围和输出目录。</p>
+      </li>
+      <li>
+        <b>看进度、拿文件</b>
+        <p>任务中心显示总体进度、当前会话、已用时间和警告。完成直接打开文件或目录，记录重启后还在。</p>
+      </li>
+    </ol>
+    <div class="callout">
+      <b>macOS 第一次打开会被拦。</b> 安装包没有 Apple 开发者证书，系统会提示「无法验证开发者」或「已损坏」。在终端执行一次 <code>xattr -cr /Applications/ChatVault.app</code>，之后不再提示。
+    </div>
+  </section>
+
+  <!-- 截图带 -->
+  <section class="section section--tight" style="padding-top:0">
+    <div class="shots">
+      <figure class="shot">
+        <img src="assets/app/03-tasks.jpg" alt="任务中心：进度条、消息数、字节数、SHA256 与打开按钮" loading="lazy" width="1100" height="688">
+        <figcaption>任务中心：一条结果就是一行，进度、消息数、字节数、SHA256、隐私检查和打开按钮都在上面。</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="assets/app/04-contacts.jpg" alt="联系人页：搜索、标签筛选与 CSV 导出" loading="lazy" width="1100" height="688">
+        <figcaption>联系人页按昵称、备注、wxid 搜索，可按标签筛选。</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="assets/app/07-moments.jpg" alt="朋友圈归档页" loading="lazy" width="1100" height="688">
+        <figcaption>朋友圈单独一页：扫描 sns.db，按作者和时间导出 HTML。</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 会员 -->
+  <section class="section" id="c6">
+    <h2 style="font-size:var(--step-h2);margin-bottom:12px">免费版先试，<br>需要时再买</h2>
+    <p style="color:var(--muted);max-width:52ch;margin-bottom:40px">免费版每个会话导最近 300 条，开放 TXT 和 CSV。七种格式、时间范围和语音转文字是会员功能。</p>
+
+    <div class="plans">
+      <div class="plan">
+        <span class="plan__when">1 天</span>
+        <span class="plan__price">¥4.99</span>
+        <span class="plan__what">一次搬家式导出：七种格式、语音转文字、时间范围，条数不限。</span>
+      </div>
+      <div class="plan">
+        <span class="plan__when">1 周</span>
+        <span class="plan__price">¥9.99</span>
+        <span class="plan__what">把几个账号整理完：上面全部，加批量账号导出。</span>
+      </div>
+      <div class="plan plan--featured">
+        <span class="plan__when">1 月</span>
+        <span class="plan__price">¥14.99</span>
+        <span class="plan__what">边导边校对：上面全部，30 天里随时补导漏掉的会话。</span>
+      </div>
+      <div class="plan">
+        <span class="plan__when">半年</span>
+        <span class="plan__price">¥29.90</span>
+        <span class="plan__what">长期归档：上面全部，摊到每月 ¥4.98。</span>
+      </div>
+    </div>
+
+    <table class="spec">
+      <thead><tr><th></th><th>免费版</th><th>会员</th></tr></thead>
+      <tbody>
+        <tr><td>单会话导出条数</td><td>最近 300 条</td><td>不限</td></tr>
+        <tr><td>导出格式</td><td>TXT / CSV</td><td>七种全部</td></tr>
+        <tr><td>语音转文字</td><td>不可用</td><td>可用</td></tr>
+        <tr><td>时间范围筛选</td><td>—</td><td>可用</td></tr>
+        <tr><td>加密 ZIP / 分片 / 校验</td><td>可用</td><td>可用</td></tr>
+        <tr><td>任务中心与历史</td><td>可用</td><td>可用</td></tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:24px;font-size:var(--step-small);color:var(--muted)">在客户端「会员」页查看设备指纹，加微信 wxid_kvni9uk7qnlc12 购买。短码需要联网兑换，长 token 可离线验签。</p>
+  </section>
+
+  <!-- 下载 -->
+  <section class="section" id="c7">
+    <h2 style="font-size:var(--step-h2);margin-bottom:12px">下载</h2>
+    <p style="color:var(--muted);max-width:52ch;margin-bottom:40px">安装包放在网盘，同一目录下含 Windows 与 macOS 两个版本，按系统取对应文件。</p>
+
+    <div class="downloads">
+      <div class="dl-group">
+        <h3>Windows 10 / 11</h3>
+        <p>解压后双击 ChatVault.exe</p>
+        <div class="dl">
+          
+          <div class="dl__row">
+            <div class="dl__main"><b>百度网盘</b><p>浏览器打开，需提取码</p></div>
+            <div class="dl__acts">
+              <a class="btn btn--primary btn--sm" href="https://pan.baidu.com/s/1pxNO_D0u1lvqNRkzTZvEmQ?pwd=Chat" target="_blank" rel="noopener">打开百度网盘</a>
+              <button class="btn btn--outline btn--sm" type="button" data-pwd="Chat">复制提取码 Chat</button>
+            </div>
           </div>
         </div>
       </div>
 
-      <p class="chapter__note" style="margin-top:14px">
-        Windows 解压后双击 <code>ChatVault.exe</code>（SmartScreen 提示时点「更多信息 → 仍要运行」）；
-        macOS 解压后拖进「应用程序」，首次打开前执行上面那条 <code>xattr</code> 命令。
-      </p>
-
-      <div class="qa">
-        <details>
-          <summary>导出的档案能发给别人看吗？</summary>
-          <p>能。整个文件夹压缩发过去，对方双击 <code>index.html</code> 就能看，不用装任何软件。</p>
-        </details>
-        <details>
-          <summary>免费版能用到什么程度？</summary>
-          <p>每个会话最近 300 条，免费版开放 TXT / CSV；会员解锁七种格式和语音转文字。时间范围筛选当前版本可用。</p>
-        </details>
-        <details>
-          <summary>语音转文字调用哪个接口？</summary>
-          <p>转写不调用在线接口。Windows 使用 whisper.cpp，macOS 使用 SenseVoice；模型首次使用时下载，之后在本机转写。</p>
-        </details>
-        <details>
-          <summary>会不会影响微信正常使用？</summary>
-          <p>只读本地数据库，不修改微信的数据。自动取密钥那一步会重启一次微信，取完自动帮你打开。</p>
-        </details>
-        <details>
-          <summary>换电脑后权限码还能用吗？</summary>
-          <p>权限码绑定设备指纹，换机后请加微信 wxid_kvni9uk7qnlc12 说明情况，咨询换机。</p>
-        </details>
+      <div class="dl-group">
+        <h3>macOS 11+ · Apple 芯片</h3>
+        <p>拖进「应用程序」，首次打开先执行 xattr</p>
+        <div class="dl">
+          
+          <div class="dl__row">
+            <div class="dl__main"><b>百度网盘</b><p>浏览器打开，需提取码</p></div>
+            <div class="dl__acts">
+              <a class="btn btn--primary btn--sm" href="https://pan.baidu.com/s/1pxNO_D0u1lvqNRkzTZvEmQ?pwd=Chat" target="_blank" rel="noopener">打开百度网盘</a>
+              <button class="btn btn--outline btn--sm" type="button" data-pwd="Chat">复制提取码 Chat</button>
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
+    </div>
 
-  </div>
+    <p style="margin-top:26px;font-size:var(--step-small);color:var(--muted)">Windows 遇到 SmartScreen，点「更多信息 → 仍要运行」。macOS 首次打开前执行 <code>xattr -cr /Applications/ChatVault.app</code>。</p>
+  </section>
+
+  <!-- 问答 -->
+  <section class="section section--tight" id="c4">
+    <h2 style="font-size:var(--step-h2);margin-bottom:10px">常见问题</h2>
+    <p style="color:var(--muted);max-width:52ch">导出的档案能不能给别人看、免费到哪一步、会不会动微信的数据，都在这里。</p>
+    <div class="qa">
+      <details>
+        <summary>导出的档案能发给别人看吗</summary>
+        <p>能。整个文件夹压缩发过去，对方双击 index.html 就能看，不用装任何软件。里面自带搜索框，图片和语音都在 media 目录里。</p>
+      </details>
+      <details>
+        <summary>免费版能用到什么程度</summary>
+        <p>每个会话最近 300 条，开放 TXT 和 CSV。加密 ZIP、分片、校验清单和任务中心都不限会员。</p>
+      </details>
+      <details>
+        <summary>语音转文字调用哪个接口</summary>
+        <p>不调用在线接口。macOS 用 SenseVoice，Windows 用 whisper.cpp，模型下载一次后在本机转写，音频不上传。</p>
+      </details>
+      <details>
+        <summary>会不会影响微信正常使用</summary>
+        <p>只读本地数据库，不修改微信的数据。自动取密钥会重启一次微信并打开重签名的副本，取完自动恢复原微信。</p>
+      </details>
+      <details>
+        <summary>换电脑后权限码还能用吗</summary>
+        <p>权限码绑定设备指纹，换机后加微信 wxid_kvni9uk7qnlc12 说明情况，咨询换机。</p>
+      </details>
+      <details>
+        <summary>导出需要留多少磁盘空间</summary>
+        <p>取决于聊天量。图片和语音是文件本身，一个两年的群聊常到几 GB。加密压缩会再占一份空间，分片后总量不变。</p>
+      </details>
+    </div>
+  </section>
+
 </div>
 
-</main>
-
-<footer class="foot">
-  <div class="foot__in">
-    <div class="foot__brand">
-      <b>聊天档案 CHATVAULT</b>
-      <p>微信聊天记录导出工具。本地解密，数据不上传。</p>
+<!-- 页脚还要再说一次 -->
+<footer class="footer" id="c8">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <h2>聊天记录是你的，<br>导出也该由你决定。</h2>
+        <p class="footer__note">本地解密、本地转写、数据不上传。非腾讯官方产品，与腾讯无隶属关系。</p>
+      </div>
+      <nav class="footer__links" aria-label="页脚导航">
+        <a href="docs.html">使用文档</a>
+        <a href="activate.html">权限码与激活</a>
+        <a href="changelog.html">更新日志</a>
+        <a href="legal/terms.html">用户协议</a>
+        <a href="legal/privacy.html">隐私政策</a>
+        <a href="demo/index.html">导出结果示例</a>
+      </nav>
     </div>
-    <div class="foot__links">
-      <a href="docs.html">使用文档</a>
-      <a href="activate.html">权限码与激活</a>
-      <a href="changelog.html">更新日志</a>
-      <a href="legal/terms.html">用户协议</a>
-      <a href="legal/privacy.html">隐私政策</a>
-    </div>
-    <div class="foot__legal">
+    <div class="footer__bottom">
       <span>© 2026 聊天档案</span>
-      <span>非腾讯官方产品，与腾讯无隶属关系</span>
       
     </div>
   </div>
 </footer>
 
-<script src="assets/app.js" defer></script>
+</main>
+
+<script src="assets/site.js?v=20261108-4" defer></script>
 </body>
 </html>

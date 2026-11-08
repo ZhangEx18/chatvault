@@ -6,49 +6,47 @@
 <title>权限码与激活 · 聊天档案 ChatVault</title>
 <meta name="description" content="权限码怎么获取、怎么激活、换电脑与重装系统怎么办。">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://miaoda.feishu.cn" crossorigin>
-<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap">
 <link rel="stylesheet" href="assets/style.css">
 <style>
   .doc { display: grid; grid-template-columns: 216px minmax(0, 1fr); gap: 56px; align-items: start; }
   .doc__side { position: sticky; top: 96px; font-size: 13.5px; }
-  .doc__side h5 { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #8f8a80; margin: 22px 0 8px; font-weight: 600; }
+  .doc__side h5 { font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin: 22px 0 8px; font-weight: 600; }
   .doc__side h5:first-child { margin-top: 0; }
-  .doc__side a { display: block; padding: 6px 0; color: var(--muted); text-decoration: none; border-left: 2px solid transparent; padding-left: 12px; margin-left: -14px; }
-  .doc__side a:hover { color: var(--pine-2); border-left-color: var(--mint); }
-  .doc__body h2 { font-family: var(--serif); font-size: 24px; margin: 56px 0 16px; padding-top: 8px; scroll-margin-top: 92px; }
+  .doc__side a { display: block; padding: 6px 0; color: var(--muted); text-decoration: none;  padding-left: 12px; margin-left: -14px; }
+  .doc__side a:hover { color: var(--pine-2);  }
+  .doc__body h2 { font-family: var(--serif); font-size: 22px; margin: 56px 0 16px; padding-top: 8px; scroll-margin-top: 92px; }
   .doc__body h2:first-child { margin-top: 0; }
   .doc__body h3 { font-size: 16px; margin: 32px 0 10px; }
-  .doc__body p, .doc__body li { font-size: 14.5px; line-height: 1.85; color: #3a423f; }
+  .doc__body p, .doc__body li { font-size: 16px; line-height: 1.85; color: var(--ink); }
   .doc__body ul, .doc__body ol { padding-left: 22px; }
   .doc__body li { margin: 6px 0; }
   .doc__body code {
-    font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px;
+    font-family: var(--sans); font-size: 13px;
     background: var(--paper-2); padding: 2px 6px; border-radius: 5px; color: var(--pine-2);
   }
   .doc__body pre {
-    background: #141413; color: #d7e5e0; padding: 16px 18px; border-radius: 12px;
+    background: #060607; color: var(--ink); padding: 16px 18px; border-radius: 12px;
     overflow-x: auto; font-size: 13px; line-height: 1.7; margin: 16px 0;
   }
   .doc__body pre code { background: none; padding: 0; color: inherit; font-size: 13px; }
   .note {
     border-left: 3px solid var(--mint); background: var(--mint-soft);
-    padding: 14px 18px; border-radius: 0 10px 10px 0; margin: 18px 0; font-size: 14px;
+    padding: 14px 18px; border-radius: 0 10px 10px 0; margin: 18px 0; font-size: 16px;
   }
   .note b { color: var(--pine-2); }
   .fp-box {
     background: var(--paper-2); border: 1px dashed var(--line-strong); border-radius: 10px;
-    padding: 14px 16px; font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    padding: 14px 16px; font-family: var(--sans);
     font-size: 13px; color: var(--pine-2); word-break: break-all; margin: 12px 0;
   }
-  table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 14px; }
-  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); }
-  th { font-size: 12.5px; color: var(--muted); font-weight: 600; letter-spacing: .04em; }
-  td code { font-size: 12.5px; }
+  table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 16px; }
+  th, td { text-align: left; padding: 10px 12px;  }
+  th { font-size: 13px; color: var(--muted); font-weight: 600; letter-spacing: .04em; }
+  td code { font-size: 13px; }
   @media (max-width: 860px) {
     .doc { grid-template-columns: 1fr; gap: 24px; }
-    .doc__side { position: static; border-bottom: 1px solid var(--line); padding-bottom: 16px; }
-    .doc__side a { display: inline-block; margin: 0 12px 0 0; padding: 4px 0; border-left: 0; }
+    .doc__side { position: static; padding-bottom: 16px; }
+    .doc__side a { display: inline-block; margin: 0 12px 0 0; padding: 4px 0;  }
   }
 </style>
 </head>
@@ -58,14 +56,14 @@
   <div class="wrap nav__inner">
     <a class="brand" href="index.html">
       <span class="brand__mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#d97757" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v18H6.5A2.5 2.5 0 0 1 4 18.5z"/><path d="M8 8h7M8 12h5"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v18H6.5A2.5 2.5 0 0 1 4 18.5z"/><path d="M8 8h7M8 12h5"/></svg>
       </span>
-      聊天档案 <span class="brand__sub">CHATVAULT</span>
+      聊天档案 <span class="brand__sub">ChatVault</span>
     </a>
     <nav class="nav__links">
       <a href="index.html#c2">功能</a>
       <a href="docs.html">文档</a>
-      <a class="btn btn--primary btn--sm nav__cta" href="index.html#c5">免费下载</a>
+      <a class="btn btn--primary btn--sm nav__cta" href="index.html#c7">免费下载</a>
     </nav>
   </div>
 </header>
@@ -97,7 +95,7 @@
 
           <h2 id="get">怎么拿到</h2>
           <ol>
-            <li>打开软件 → 右上角「开通会员」，能看到当前的时长档位</li>
+            <li>打开软件 → 左侧「会员」，能看到当前的时长档位</li>
             <li>加微信 <b>wxid_kvni9uk7qnlc12</b>（9:00–22:00），提供会员界面显示的设备指纹，并告知需要的档位</li>
             <li>按软件里显示的金额转账或赞赏，把截图发过去</li>
             <li>收到权限码，通常十分钟内</li>
@@ -105,8 +103,8 @@
 
           <h2 id="use">怎么激活</h2>
           <ol>
-            <li>打开软件，点右上角「开通会员」</li>
-            <li>把短码或长 token 粘贴到弹窗底部的输入框</li>
+            <li>打开软件，点左侧「会员」</li>
+            <li>把短码或长 token 粘贴到「激活」输入框</li>
             <li>点「激活」</li>
             <li>查看激活结果与会员到期时间</li>
           </ol>

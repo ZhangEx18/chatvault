@@ -6,19 +6,17 @@
 <title>隐私政策 · 聊天档案 ChatVault</title>
 <meta name="robots" content="noindex">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://miaoda.feishu.cn" crossorigin>
-<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap">
 <link rel="stylesheet" href="../assets/style.css">
 <style>
   .legal { max-width: 720px; margin: 0 auto; }
-  .legal h2 { font-family: var(--serif); font-size: 20px; margin: 40px 0 12px; }
-  .legal p, .legal li { font-size: 14.5px; line-height: 1.9; color: #3a423f; }
+  .legal h2 { font-family: var(--serif); font-size: 22px; margin: 40px 0 12px; }
+  .legal p, .legal li { font-size: 16px; line-height: 1.9; color: var(--ink); }
   .legal ul { padding-left: 22px; }
   .legal li { margin: 6px 0; }
   .legal__meta { font-size: 13px; color: var(--muted); margin-bottom: 32px; }
-  .legal table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 14px; }
-  .legal th, .legal td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
-  .legal th { font-size: 12.5px; color: var(--muted); font-weight: 600; }
+  .legal table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 16px; }
+  .legal th, .legal td { text-align: left; padding: 10px 12px;  vertical-align: top; }
+  .legal th { font-size: 13px; color: var(--muted); font-weight: 600; }
 </style>
 </head>
 <body>
@@ -27,9 +25,9 @@
   <div class="wrap nav__inner">
     <a class="brand" href="../index.html">
       <span class="brand__mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#d97757" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v18H6.5A2.5 2.5 0 0 1 4 18.5z"/><path d="M8 8h7M8 12h5"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v18H6.5A2.5 2.5 0 0 1 4 18.5z"/><path d="M8 8h7M8 12h5"/></svg>
       </span>
-      聊天档案 <span class="brand__sub">CHATVAULT</span>
+      聊天档案 <span class="brand__sub">ChatVault</span>
     </a>
     <nav class="nav__links">
       <a href="../index.html">首页</a>
@@ -43,7 +41,6 @@
   <section class="section" style="padding-top:130px">
     <div class="wrap">
       <div class="legal">
-        <span class="eyebrow"><b>Privacy</b>隐私政策</span>
         <h1 style="font-family:var(--serif);font-size:clamp(28px,4vw,38px);margin:16px 0 8px">隐私政策</h1>
         <p class="legal__meta">最后更新：2026 年 11 月 8 日</p>
 
@@ -61,7 +58,7 @@
 
         <h2>二、哪些操作会联网</h2>
         <ul>
-          <li><b>下载语音模型</b>：首次使用时，Windows 从 Hugging Face 或其镜像下载约 181 MiB 模型，macOS 从 ModelScope 下载约 229 MiB 模型及词表；之后转写不需要联网。</li>
+          <li><b>下载语音模型</b>：首次使用时，Windows 从 Hugging Face 或其镜像下载约 181 MiB 模型，macOS 从 ModelScope 下载约 239 MB 模型及词表（合计约 245 MB）；之后转写不需要联网。</li>
           <li><b>兑换短码</b>：向授权服务器发送短码和设备指纹，取得授权后在本地验签；聊天内容和数据库密钥不会随兑换请求发送。</li>
           <li><b>客户端没有更新检查</b>：客户端不再请求更新服务器，也不会向厂商仓库发请求。</li>
           <li><b>没有遥测</b>：不上报使用行为或崩溃信息。</li>
@@ -69,7 +66,7 @@
         <p>完成模型下载并使用长 token 或已有授权后，其余功能（解密、浏览、导出、检索、语音转写）<b>断网可用</b>。本地服务只监听 <code>127.0.0.1</code>，端口随机，并带一次性令牌。</p>
 
         <h2>三、本站收集什么</h2>
-        <p>本站是静态页面，不使用第三方统计脚本、不使用广告像素、不设置跟踪 Cookie。页面会从 <code>miaoda.feishu.cn</code> 加载字体，并请求站点自己的版本接口；托管平台（GitHub Pages 或自有服务器）会记录常规访问日志（IP、时间、请求路径），用于排查故障，我们不从中做任何用户画像。</p>
+        <p>本站是静态页面，不使用第三方统计脚本、不使用广告像素、不设置跟踪 Cookie。页面使用系统字体，不加载第三方字体；托管平台（GitHub Pages 或自有服务器）会记录常规访问日志（IP、时间、请求路径），用于排查故障，我们不从中做任何用户画像。</p>
 
         <h2>四、付款</h2>
         <p>当前人工流程通过微信转账完成，我们不接触也不存储你的银行卡号、支付密码或完整支付账户信息。我们只知道转账金额和你的微信昵称，用于核对并发权限码；如果未来启用其他支付渠道，会按实际渠道更新说明。</p>

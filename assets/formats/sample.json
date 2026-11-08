@@ -1,0 +1,63 @@
+{
+  "contact": "小A",
+  "username": "wxid_alice",
+  "is_group": false,
+  "export_time": "2026-11-08T22:04:42",
+  "count": 3,
+  "messages": [
+    {
+      "local_type": 1,
+      "sender_id": 1,
+      "time": 1735689600,
+      "sort_seq": 1735689600,
+      "local_id": 1,
+      "server_id": 1001,
+      "kind": "text",
+      "text": "第一条",
+      "sender": "小A",
+      "duration": null,
+      "md5": "",
+      "md5s": [],
+      "extra": {},
+      "db_name": "message_0.db.dec.db",
+      "is_mine": false,
+      "sender_raw": 1
+    },
+    {
+      "local_type": 1,
+      "sender_id": 2,
+      "time": 1735689610,
+      "sort_seq": 1735689610,
+      "local_id": 2,
+      "server_id": 1002,
+      "kind": "text",
+      "text": "第二条",
+      "sender": "小A",
+      "duration": null,
+      "md5": "",
+      "md5s": [],
+      "extra": {},
+      "db_name": "message_0.db.dec.db",
+      "is_mine": false,
+      "sender_raw": 2
+    },
+    {
+      "local_type": 3,
+      "sender_id": 1,
+      "time": 1735689620,
+      "sort_seq": 1735689620,
+      "local_id": 3,
+      "server_id": 1003,
+      "kind": "image",
+      "text": "[图片]",
+      "sender": "小A",
+      "duration": null,
+      "md5": "",
+      "md5s": [],
+      "extra": {},
+      "db_name": "message_0.db.dec.db",
+      "is_mine": false,
+      "sender_raw": 1
+    }
+  ]
+}

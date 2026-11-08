@@ -1,0 +1,35 @@
+{
+  "note": "由本机 ChatVault 2.0 真实导出：小A，3 条消息，2025-01-01",
+  "contact": "小A",
+  "messages": 3,
+  "files": {
+    "sample.html": {
+      "bytes": 2741,
+      "sha256": "cf432fbb0d1669b8e40b198a865fc1f7e427db7701821ee01add9097c8eea516"
+    },
+    "sample.pdf": {
+      "bytes": 18348,
+      "sha256": "e211188cc7342bf915942bc1aef113a69751e9e17524e32496550d0299898a45"
+    },
+    "sample.xlsx": {
+      "bytes": 5232,
+      "sha256": "8d10ea5c4e60af8545a66d574b8baa921cc8f1580e960c489b4a0320223152b3"
+    },
+    "sample.json": {
+      "bytes": 1337,
+      "sha256": "cfe4de6842fbfc50df3442e264eb9784a69da814a35fdcb9aac50924dafd9116"
+    },
+    "sample.md": {
+      "bytes": 123,
+      "sha256": "aaa90240ece3685b4aff7926f3ce98cd350a8e2add1712d63bac134666ae4ee6"
+    },
+    "sample.csv": {
+      "bytes": 158,
+      "sha256": "9413e3419432d522ee3a2b464a23a8b70cf35d0970589a66bc5bd5a94fe92693"
+    },
+    "sample.txt": {
+      "bytes": 416,
+      "sha256": "8cd6652234b67d2b0f75ec6b9303d5bfebd790508ba2c9c44b8682741aeea3eb"
+    }
+  }
+}

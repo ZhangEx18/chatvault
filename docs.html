@@ -6,44 +6,42 @@
 <title>使用文档 · 聊天档案 ChatVault</title>
 <meta name="description" content="聊天档案 ChatVault 的安装、取密钥、导出、语音转文字与权限码激活说明。">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://miaoda.feishu.cn" crossorigin>
-<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap">
 <link rel="stylesheet" href="assets/style.css">
 <style>
   .doc { display: grid; grid-template-columns: 216px minmax(0, 1fr); gap: 56px; align-items: start; }
-  .doc__side { position: sticky; top: 96px; font-size: 13.5px; }
-  .doc__side h5 { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #8f8a80; margin: 22px 0 8px; font-weight: 600; }
+  .doc__side { position: sticky; top: 96px; font-size: 15px; }
+  .doc__side h5 { font-family: var(--serif); font-size: 16px; color: var(--ink); margin: 26px 0 8px; font-weight: 600; }
   .doc__side h5:first-child { margin-top: 0; }
-  .doc__side a { display: block; padding: 6px 0; color: var(--muted); text-decoration: none; border-left: 2px solid transparent; padding-left: 12px; margin-left: -14px; }
-  .doc__side a:hover { color: var(--pine-2); border-left-color: var(--mint); }
-  .doc__body h2 { font-family: var(--serif); font-size: 24px; margin: 56px 0 16px; padding-top: 8px; scroll-margin-top: 92px; }
+  .doc__side a { display: block; padding: 5px 0; color: var(--muted); text-decoration: none; }
+  .doc__side a:hover { color: var(--ink); }
+  .doc__body h2 { font-family: var(--serif); font-size: 22px; margin: 56px 0 16px; padding-top: 8px; scroll-margin-top: 92px; }
   .doc__body h2:first-child { margin-top: 0; }
   .doc__body h3 { font-size: 16px; margin: 32px 0 10px; }
-  .doc__body p, .doc__body li { font-size: 14.5px; line-height: 1.85; color: #3a423f; }
+  .doc__body p, .doc__body li { font-size: 16px; line-height: 1.85; color: var(--ink); }
   .doc__body ul, .doc__body ol { padding-left: 22px; }
   .doc__body li { margin: 6px 0; }
   .doc__body code {
-    font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px;
-    background: var(--paper-2); padding: 2px 6px; border-radius: 5px; color: var(--pine-2);
+    font-family: var(--sans); font-size: 13px;
+    background: var(--surface-2); padding: 2px 6px; border-radius: 5px; color: var(--ink);
   }
   .doc__body pre {
-    background: #141413; color: #d7e5e0; padding: 16px 18px; border-radius: 12px;
+    background: #060607; color: var(--ink); padding: 16px 18px; border-radius: 12px;
     overflow-x: auto; font-size: 13px; line-height: 1.7; margin: 16px 0;
   }
   .doc__body pre code { background: none; padding: 0; color: inherit; font-size: 13px; }
   .note {
     border-left: 3px solid var(--mint); background: var(--mint-soft);
-    padding: 14px 18px; border-radius: 0 10px 10px 0; margin: 18px 0; font-size: 14px;
+    padding: 14px 18px; border-radius: 0 10px 10px 0; margin: 18px 0; font-size: 16px;
   }
   .note b { color: var(--pine-2); }
-  table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 14px; }
-  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); }
-  th { font-size: 12.5px; color: var(--muted); font-weight: 600; letter-spacing: .04em; }
-  td code { font-size: 12.5px; }
+  table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 16px; }
+  th, td { text-align: left; padding: 10px 12px;  }
+  th { font-size: 13px; color: var(--muted); font-weight: 600; letter-spacing: .04em; }
+  td code { font-size: 13px; }
   @media (max-width: 860px) {
     .doc { grid-template-columns: 1fr; gap: 24px; }
-    .doc__side { position: static; border-bottom: 1px solid var(--line); padding-bottom: 16px; }
-    .doc__side a { display: inline-block; margin: 0 12px 0 0; padding: 4px 0; border-left: 0; }
+    .doc__side { position: static; padding-bottom: 16px; }
+    .doc__side a { display: inline-block; margin: 0 12px 0 0; padding: 4px 0;  }
   }
 </style>
 </head>
@@ -53,14 +51,14 @@
   <div class="wrap nav__inner">
     <a class="brand" href="index.html">
       <span class="brand__mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#d97757" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v18H6.5A2.5 2.5 0 0 1 4 18.5z"/><path d="M8 8h7M8 12h5"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v18H6.5A2.5 2.5 0 0 1 4 18.5z"/><path d="M8 8h7M8 12h5"/></svg>
       </span>
-      聊天档案 <span class="brand__sub">CHATVAULT</span>
+      聊天档案 <span class="brand__sub">ChatVault</span>
     </a>
     <nav class="nav__links">
       <a href="index.html#c2">功能</a>
       <a href="docs.html">文档</a>
-      <a class="btn btn--primary btn--sm nav__cta" href="index.html#c5">免费下载</a>
+      <a class="btn btn--primary btn--sm nav__cta" href="index.html#c7">免费下载</a>
     </nav>
   </div>
 </header>
@@ -81,7 +79,13 @@
           <a href="#export">勾选会话导出</a>
           <a href="#formats">七种格式</a>
           <a href="#asr">语音转文字</a>
+          <a href="#zip">加密 ZIP 与校验</a>
+          <a href="#batch">批量账号导出</a>
           <h5>其它</h5>
+          <a href="#contacts">联系人</a>
+          <a href="#privacy-scan">隐私检查</a>
+          <a href="#moments">朋友圈归档</a>
+          <a href="#cache">缓存管理</a>
           <a href="#license">权限码激活</a>
           <a href="#faq">常见故障</a>
         </aside>
@@ -93,7 +97,7 @@
             <tr><th>项目</th><th>要求</th></tr>
             <tr><td>操作系统</td><td>Windows 10 1803+ / Windows 11；macOS 11 及以上（Apple 芯片，当前主要测试 macOS 12+）</td></tr>
             <tr><td>微信</td><td>微信 4.x 桌面版（Windows / macOS），且已在这台电脑上登录过</td></tr>
-            <tr><td>磁盘</td><td>程序约 200 MB；语音模型可选，Windows 约 181 MiB，macOS 约 229 MiB；导出体积取决于聊天量</td></tr>
+            <tr><td>磁盘</td><td>程序约 200 MB；语音模型可选，Windows 约 181 MiB，macOS 约 239 MB + 词表（约 245 MB）；导出体积取决于聊天量</td></tr>
             <tr><td>macOS 取密钥</td><td>微信 4.x 走微信副本与 hook 流程，需要在副本里完成一次手机登录确认</td></tr>
             <tr><td>转 PDF</td><td>macOS 使用系统 WebKit；Windows 需要 Microsoft Edge 或 Chromium</td></tr>
           </table>
@@ -182,11 +186,40 @@
             <li>免费版此开关不可用，会提示开通会员</li>
           </ul>
 
+          <h2 id="tasks">任务中心与状态</h2>
+          <p>每次导出都会在「任务中心」留下记录：总体进度、当前会话、成功/失败数量、警告和输出文件。任务记录保存在本机，重启客户端后仍然保留。</p>
+          <table>
+            <tr><th>状态</th><th>含义</th><th>可以做什么</th></tr>
+            <tr><td>已完成</td><td>所有会话成功</td><td>打开文件或输出目录</td></tr>
+            <tr><td>部分完成</td><td>有会话失败，或部分媒体缺失</td><td>打开结果并查看警告</td></tr>
+            <tr><td>失败</td><td>没有成功导出任何会话</td><td>查看原因后重试</td></tr>
+            <tr><td>已取消</td><td>用户停止了任务</td><td>重新导出</td></tr>
+          </table>
+          <p>资源状态分为：已找到、未缓存、文件缺失、解密失败、格式暂不支持、部分完成。客户端会按状态给出下一步操作，例如重新获取密钥、切换格式或继续导出文字内容。</p>
+
+          <h2 id="zip">加密 ZIP 与完整性报告</h2>
+          <p>导出时填写「加密 ZIP」密码，会把结果打包成 AES 加密压缩包；HTML 会连同 media 目录一起打包。每次导出都会记录消息数、文件大小和 SHA256，任务中心可以直接查看。超过 1.5 GB 的压缩包会按字节分片，并在同目录生成 <code>SHA256SUMS.txt</code>。</p>
+
+          <h2 id="batch">批量账号导出</h2>
+          <p>首页「批量导出全部账号」会按账号顺序导出所有有消息的会话。没有密钥的账号会跳过并记录原因；任务中心显示当前账号、当前会话和成功/失败数量。批量导出同样支持格式、输出目录和语音转文字。</p>
+
+          <h2 id="contacts">联系人</h2>
+          <p>「联系人」页搜索昵称、备注或 wxid，按标签筛选，并导出联系人 CSV。联系人来自解密后的 <code>contact.db</code>，不需要联网。</p>
+
+          <h2 id="privacy-scan">分享前隐私检查</h2>
+          <p>任务中心的导出结果可以点「隐私检查」，扫描手机号、身份证、银行卡和邮箱，只显示数量和掩码样本。检查 TXT / HTML / CSV / JSON / Markdown；压缩包和 PDF 需要先解压或转换。</p>
+
+          <h2 id="moments">朋友圈归档</h2>
+          <p>客户端「朋友圈」页会读取本机 <code>sns.db</code>，扫描作者和时间线，再按作者或全部导出为 HTML 归档。需要数据库密钥；首次扫描可能需要一些时间，扫描结果会缓存在本机。</p>
+
+          <h2 id="cache">缓存管理</h2>
+          <p>设置页会显示解密缓存的目录和占用，可一键清理。清理只会删除解密后的临时数据库和语音识别结果，不会删除数据库密钥、配置或已导出的文件；下次打开需要重新解密。</p>
+
           <h2 id="license">权限码激活</h2>
           <ol>
-            <li>点右上角「开通会员」</li>
+            <li>点左侧「会员」</li>
             <li>选时长，向客服提供设备指纹，付款后获取短码或长 token</li>
-            <li>把权限码粘进弹窗底部的输入框，点「激活」</li>
+            <li>把权限码粘进「激活」输入框，点「激活」</li>
           </ol>
           <p>新版 Windows 和 macOS 都支持联网兑换 15 位短码，也支持长 token 离线激活。授权绑定设备指纹，续购时长从已有有效授权的到期时间继续累加。详见<a href="activate.html">权限码与激活</a>。</p>
 
@@ -200,7 +233,7 @@
           <h3>导出 PDF 失败</h3>
           <p>macOS 使用系统 WebKit，一般不需要额外安装；Windows 需要 Microsoft Edge 或 Chromium，装一个再试，或改用 HTML 格式。</p>
           <h3>激活提示「权限码无效」</h3>
-          <p>请按弹窗中的具体提示核对权限码、设备指纹、电脑时间和网络；仍有问题时把提示发给客服。</p>
+          <p>请按会员页中的具体提示核对权限码、设备指纹、电脑时间和网络；仍有问题时把提示发给客服。</p>
         </div>
       </div>
     </div>

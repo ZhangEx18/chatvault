@@ -6,22 +6,20 @@
 <title>更新日志 · 聊天档案</title>
 <meta name="description" content="聊天档案各版本更新记录。">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://miaoda.feishu.cn" crossorigin>
-<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap">
 <link rel="stylesheet" href="assets/style.css">
 <style>
   .log { max-width: 760px; }
-  .log__item { display: grid; grid-template-columns: 132px 1fr; gap: 28px; padding: 28px 0; border-bottom: 1px solid var(--line); }
-  .log__item:last-child { border-bottom: 0; }
-  .log__ver { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 14px; color: var(--pine-2); font-weight: 600; }
-  .log__date { font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+  .log__item { display: grid; grid-template-columns: 132px 1fr; gap: 28px; padding: 28px 0;  }
+  
+  .log__ver { font-family: var(--sans); font-size: 16px; color: var(--pine-2); font-weight: 600; }
+  .log__date { font-size: 13px; color: var(--muted); margin-top: 6px; }
   .log__tag {
-    display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 999px;
-    background: var(--mint-soft); color: var(--pine-2); margin-bottom: 10px; font-weight: 600;
+    display: inline-block; font-size: 13px; padding: 3px 9px; border-radius: 999px;
+    background: var(--surface-2); color: var(--muted); margin-bottom: 10px; font-weight: 500;
   }
-  .log h3 { font-size: 17px; margin: 0 0 12px; }
+  .log h3 { font-size: 19px; margin: 0 0 12px; }
   .log ul { margin: 0; padding-left: 20px; }
-  .log li { font-size: 14.5px; line-height: 1.8; color: #3a423f; margin: 5px 0; }
+  .log li { font-size: 16px; line-height: 1.8; color: var(--ink); margin: 5px 0; }
   .log li b { color: var(--pine-2); font-weight: 600; }
   @media (max-width: 680px) { .log__item { grid-template-columns: 1fr; gap: 10px; } }
 </style>
@@ -32,14 +30,14 @@
   <div class="wrap nav__inner">
     <a class="brand" href="index.html">
       <span class="brand__mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#d97757" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v18H6.5A2.5 2.5 0 0 1 4 18.5z"/><path d="M8 8h7M8 12h5"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v18H6.5A2.5 2.5 0 0 1 4 18.5z"/><path d="M8 8h7M8 12h5"/></svg>
       </span>
-      聊天档案 <span class="brand__sub">CHATVAULT</span>
+      聊天档案 <span class="brand__sub">ChatVault</span>
     </a>
     <nav class="nav__links">
       <a href="index.html#c2">功能</a>
       <a href="docs.html">文档</a>
-      <a class="btn btn--primary btn--sm nav__cta" href="index.html#c5">免费下载</a>
+      <a class="btn btn--primary btn--sm nav__cta" href="index.html#c7">免费下载</a>
     </nav>
   </div>
 </header>
@@ -47,10 +45,35 @@
 <main>
   <section class="section" style="padding-top:120px">
     <div class="wrap">
-      <span class="eyebrow"><b>Changelog</b>当前 v0.1.2</span>
       <h1 style="font-family:var(--serif);font-size:clamp(30px,4vw,42px);margin:16px 0 40px">更新日志</h1>
 
       <div class="log">
+        <article class="log__item">
+          <div>
+            <div class="log__ver">v1.3.0</div>
+            <div class="log__date">2026-11-08</div>
+          </div>
+          <div>
+            <span class="log__tag">1.3</span>
+            <h3>统一官网与客户端的新界面</h3>
+            <ul>
+              <li><b>全新客户端壳层</b>：首页、会话、导出、任务中心、会员、设置六个页面，统一视觉和状态语言。</li>
+              <li><b>任务中心</b>：总体进度、当前会话、成功/失败、警告和输出文件；记录保存在本机，重启后仍可查看。</li>
+              <li><b>资源状态</b>：已找到、未缓存、文件缺失、解密失败、格式暂不支持、部分完成。</li>
+              <li><b>会员</b>：短码与长 token 统一入口；激活失败不覆盖现有授权，较短授权不会覆盖更长授权。</li>
+              <li><b>官网</b>：新的信息架构、按系统分组的下载卡片、状态说明和路线图；移除外部字体依赖。</li>
+              <li><b>语音转文字</b>：TXT / JSON / XLSX 也会写入「【语音转文字】」，macOS 补齐 SILK 解码。</li>
+              <li><b>朋友圈归档</b>：新增「朋友圈」页，扫描本机 sns.db 并按作者导出 HTML 归档。</li>
+              <li><b>缓存管理</b>：设置页显示解密缓存占用，可一键清理，不影响密钥和已导出文件。</li>
+              <li><b>加密 ZIP</b>：导出时可设置密码，使用 AES 加密；HTML 会连同 media 一起打包。</li>
+              <li><b>完整性报告</b>：每次导出记录消息数、文件大小和 SHA256；超过 1.5 GB 自动分片并生成校验文件。</li>
+              <li><b>隐私检查</b>：导出结果可扫描手机号、身份证、银行卡和邮箱，只显示数量和掩码样本。</li>
+              <li><b>联系人与批量账号</b>：新增联系人搜索/标签/CSV 导出；首页支持批量导出全部账号。</li>
+              <li><b>断点续传</b>：中断或失败的导出任务可以在任务中心继续剩余会话。</li>
+            </ul>
+          </div>
+        </article>
+
         <article class="log__item">
           <div>
             <div class="log__ver">v0.1.2</div>
