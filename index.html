@@ -149,8 +149,9 @@
         <tbody>
           <tr><td>导出、浏览、检索</td><td>0 次请求</td></tr>
           <tr><td>解密数据库</td><td>本地文件读写</td></tr>
-          <tr><td>语音转文字</td><td>本地 whisper.cpp，不上传</td></tr>
-          <tr><td>下载语音模型</td><td>仅首次，181 MB，之后不再联网</td></tr>
+          <tr><td>语音转文字</td><td>本地转写，不上传</td></tr>
+          <tr><td>下载语音模型</td><td>首次使用时联网下载</td></tr>
+          <tr><td>短码激活</td><td>联网发送短码和设备指纹；长 token 可离线激活</td></tr>
           <tr><td>版本检查 / 遥测</td><td>没有</td></tr>
         </tbody>
       </table>
@@ -188,7 +189,7 @@
         </details>
         <details>
           <summary>语音转文字调用哪个接口？</summary>
-          <p>不调用接口。内置 whisper.cpp 和 181 MB 的 ggml-small 模型，转写在你自己的电脑上完成。</p>
+          <p>转写不调用在线接口。Windows 使用 whisper.cpp，macOS 使用 SenseVoice；模型首次使用时下载，之后在本机转写。</p>
         </details>
         <details>
           <summary>会不会影响微信正常使用？</summary>
@@ -196,7 +197,7 @@
         </details>
         <details>
           <summary>换电脑后权限码还能用吗？</summary>
-          <p>权限码绑定本机的 IOPlatformUUID，换机会激活失败。加微信 wxid_kvni9uk7qnlc12 说明情况可以补发。</p>
+          <p>权限码绑定设备指纹，换机后请加微信 wxid_kvni9uk7qnlc12 说明情况，咨询换机。</p>
         </details>
       </div>
     </section>

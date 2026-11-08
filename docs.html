@@ -93,7 +93,7 @@
             <tr><th>项目</th><th>要求</th></tr>
             <tr><td>操作系统</td><td>Windows 10 1803+ / Windows 11；macOS 12 Monterey 及以上（Apple 芯片）</td></tr>
             <tr><td>微信</td><td>微信 4.x 桌面版（Windows / macOS），且已在这台电脑上登录过</td></tr>
-            <tr><td>磁盘</td><td>程序约 200 MB；语音模型 181 MB（可选）；导出体积取决于聊天量</td></tr>
+            <tr><td>磁盘</td><td>程序约 200 MB；语音模型可选，Windows 约 181 MiB，macOS 约 229 MiB；导出体积取决于聊天量</td></tr>
             <tr><td>macOS 取密钥</td><td>无需 <code>lldb</code>，也无需管理员密码；需要你在微信副本里完成一次手机登录确认</td></tr>
             <tr><td>转 PDF</td><td>macOS 使用系统 WebKit；Windows 需要 Microsoft Edge 或 Chromium</td></tr>
           </table>
@@ -175,9 +175,9 @@
           <p><strong>免费版</strong>开放 TXT / CSV；Markdown、Excel、HTML、JSON、PDF 为会员格式。</p>
 
           <h2 id="asr">语音转文字</h2>
-          <p>引擎是 whisper.cpp，随 App 一起打包，<strong>不上传、不按次收费</strong>。</p>
+          <p>语音在本机转写，<strong>不上传、不按次收费</strong>。Windows 使用 whisper.cpp，macOS 使用 SenseVoice。</p>
           <ul>
-            <li>模型 <code>ggml-small-q5_1.bin</code>，181 MB，首次点「下载语音模型」时下载到 <code>~/Library/Application Support/ChatVault/models/</code></li>
+            <li>首次使用时下载模型：Windows 约 181 MiB，macOS 约 229 MiB；下载后可离线转写</li>
             <li>转写结果会写进 HTML / PDF 导出文件，语音气泡下面多一行文字</li>
             <li>免费版此开关不可用，会提示开通会员</li>
           </ul>
@@ -185,10 +185,10 @@
           <h2 id="license">权限码激活</h2>
           <ol>
             <li>点右上角「开通会员」</li>
-            <li>选时长，加微信转账，拿到 Ed25519 v2 格式的权限 token</li>
+            <li>选时长，向客服提供设备指纹，付款后获取短码或长 token</li>
             <li>把权限码粘进弹窗底部的输入框，点「激活」</li>
           </ol>
-          <p>权限 token 使用 Ed25519 签名，客户端内置公钥后离线验签，不联网。token 绑定这台电脑的 <code>IOPlatformUUID</code>，拷到别的机器无效。</p>
+          <p>长 token 可离线激活；新版 macOS 支持联网兑换 15 位短码，目前下载的 Windows 版本请使用长 token。授权绑定设备指纹，续购时长从已有有效授权的到期时间继续累加。详见<a href="activate.html">权限码与激活</a>。</p>
 
           <h2 id="faq">常见故障</h2>
           <h3>提示「无法验证开发者」/「App 已损坏」</h3>
@@ -200,7 +200,7 @@
           <h3>导出 PDF 失败</h3>
           <p>macOS 使用系统 WebKit，一般不需要额外安装；Windows 需要 Microsoft Edge 或 Chromium，装一个再试，或改用 HTML 格式。</p>
           <h3>激活提示「权限码无效」</h3>
-          <p>三种可能：码抄漏了字符、token 已过期或已被撤销、这台电脑不是签发时绑定的那台。</p>
+          <p>请按弹窗中的具体提示核对权限码、设备指纹、电脑时间和网络；仍有问题时把提示发给客服。</p>
         </div>
       </div>
     </div>
