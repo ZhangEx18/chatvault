@@ -91,17 +91,17 @@
           <h2 id="req">系统要求</h2>
           <table>
             <tr><th>项目</th><th>要求</th></tr>
-            <tr><td>操作系统</td><td>Windows 10 1803+ / Windows 11；macOS 12 Monterey 及以上（Apple 芯片）</td></tr>
+            <tr><td>操作系统</td><td>Windows 10 1803+ / Windows 11；macOS 11 及以上（Apple 芯片，当前主要测试 macOS 12+）</td></tr>
             <tr><td>微信</td><td>微信 4.x 桌面版（Windows / macOS），且已在这台电脑上登录过</td></tr>
             <tr><td>磁盘</td><td>程序约 200 MB；语音模型可选，Windows 约 181 MiB，macOS 约 229 MiB；导出体积取决于聊天量</td></tr>
-            <tr><td>macOS 取密钥</td><td>无需 <code>lldb</code>，也无需管理员密码；需要你在微信副本里完成一次手机登录确认</td></tr>
+            <tr><td>macOS 取密钥</td><td>微信 4.x 走微信副本与 hook 流程，需要在副本里完成一次手机登录确认</td></tr>
             <tr><td>转 PDF</td><td>macOS 使用系统 WebKit；Windows 需要 Microsoft Edge 或 Chromium</td></tr>
           </table>
 
           <h2 id="install">下载与安装</h2>
           <h3>macOS</h3>
           <ol>
-            <li>从网盘下载 <code>ChatVault-0.1.2-macos-arm64.dmg</code>，打开后把 <code>ChatVault.app</code> 拖进「应用程序」</li>
+            <li>从网盘下载 macOS Apple 芯片安装包，打开后把 <code>ChatVault.app</code> 拖进「应用程序」</li>
             <li>首次打开会被 Gatekeeper 拦（提示「无法验证开发者」或「已损坏」），打开终端执行一次：</li>
           </ol>
           <pre><code>xattr -cr /Applications/ChatVault.app</code></pre>
@@ -121,16 +121,17 @@
           <p>微信 4.x 的数据库是 SQLCipher 加密的，必须先拿到密钥才能解密。三种方式：</p>
           <h3>1. 自动获取（推荐，macOS）</h3>
           <ol>
-            <li>选中账号 → 勾选「先重启微信」</li>
-            <li>点「自动获取密钥」，系统会弹管理员授权框，输入密码</li>
-            <li>工具会重启微信、在 <code>CCKeyDerivationPBKDF</code> 下断点抄下口令与 salt，校验通过后自动写进配置并开始解密</li>
+            <li>选中账号，点「自动获取密钥」</li>
+            <li>工具会复制一份微信、注入本地 hook 并启动副本</li>
+            <li>在微信副本里完成手机确认或点击「进入微信」，校验通过后密钥会写进本机配置并开始解密</li>
           </ol>
-          <div class="note"><b>为什么必须输密码：</b>微信是 hardened runtime 且没有 <code>get-task-allow</code>，普通用户身份附加进程一定失败。抓取只在本机内存里读一次，不落盘、不上传。</div>
+          <div class="note"><b>过程说明：</b>微信 4.x 的 hardened runtime 不适合普通进程附加。工具会把 hook 命中结果临时写入本机容器，校验完成后清理；聊天内容和数据库密钥不会上传。</div>
 
-          <h3>2. 命令行（适合排查）</h3>
+          <h3>2. 命令行（旧版微信或排障）</h3>
           <pre><code>sudo ./ChatVault.app/Contents/MacOS/ChatVault --capture-keys \
   --pid $(pgrep -f 'WeChat.app/Contents/MacOS/WeChat') \
   --out ~/cv-key.json</code></pre>
+          <p>微信 4.x 优先使用上面的自动流程；这条命令保留给旧版微信和排障场景。</p>
 
           <h3>3. 导入已有密钥</h3>
           <p>如果之前用别的工具取过密钥，直接在面板里粘贴 hex 即可，不用重复抓。</p>
@@ -148,18 +149,17 @@
           <ol>
             <li>选中账号 → 密钥通过后进入会话列表</li>
             <li>按人、按群勾选要导出的会话</li>
-            <li>选格式、选时间段（会员可自定范围）</li>
+            <li>选格式、选时间段</li>
             <li>需要转写语音就打开「语音转文字」（会员功能）</li>
             <li>点导出，进度条走完自动打开输出目录</li>
           </ol>
           <pre><code>李老师_聊天记录/
-├── index.html          ← 双击就能看
-├── media/
-│   ├── voice_0041.mp3
-│   ├── img_0087.jpg
-│   └── avatar_li.jpg
-├── 联系人信息.csv
-└── 李老师_聊天记录.pdf</code></pre>
+├── index.html          ← 选择 HTML 时生成
+└── media/
+    ├── voice_0041.mp3
+    ├── img_0087.jpg
+    └── avatar_li.jpg</code></pre>
+          <p>上面是 HTML 导出的示意结构；选择 PDF 会另外生成 PDF，联系人信息 CSV 需要单独导出。</p>
 
           <h2 id="formats">七种格式</h2>
           <table>
@@ -172,7 +172,7 @@
             <tr><td><code>html</code></td><td>发给别人看</td><td>带搜索、图片、语音，最完整</td></tr>
             <tr><td><code>pdf</code></td><td>打印、存档</td><td>由 HTML 排版后转；macOS 用系统 WebKit，Windows 需要 Edge 或 Chromium</td></tr>
           </table>
-          <p><strong>免费版</strong>开放 TXT / CSV；Markdown、Excel、HTML、JSON、PDF 为会员格式。</p>
+          <p><strong>免费版</strong>开放 TXT / CSV；Markdown、Excel、HTML、JSON、PDF 为会员格式。时间范围筛选当前版本可用。</p>
 
           <h2 id="asr">语音转文字</h2>
           <p>语音在本机转写，<strong>不上传、不按次收费</strong>。Windows 使用 whisper.cpp，macOS 使用 SenseVoice。</p>
@@ -188,7 +188,7 @@
             <li>选时长，向客服提供设备指纹，付款后获取短码或长 token</li>
             <li>把权限码粘进弹窗底部的输入框，点「激活」</li>
           </ol>
-          <p>长 token 可离线激活；新版 macOS 支持联网兑换 15 位短码，目前下载的 Windows 版本请使用长 token。授权绑定设备指纹，续购时长从已有有效授权的到期时间继续累加。详见<a href="activate.html">权限码与激活</a>。</p>
+          <p>新版 Windows 和 macOS 都支持联网兑换 15 位短码，也支持长 token 离线激活。授权绑定设备指纹，续购时长从已有有效授权的到期时间继续累加。详见<a href="activate.html">权限码与激活</a>。</p>
 
           <h2 id="faq">常见故障</h2>
           <h3>提示「无法验证开发者」/「App 已损坏」</h3>

@@ -38,12 +38,12 @@
     <p class="cover__kicker">微信聊天记录导出工具 · 本地运行</p>
     <h1 class="cover__title">你的聊天记录，<br>应该能带得走。</h1>
     <p class="cover__sub">
-      微信把聊天存在本地一个加密数据库里，除了微信自己，谁也打不开。
-      聊天档案把这个库读出来，导出成能搜索、能打印、能发给别人的文件——解密和导出都在你自己的电脑上完成。
+      微信把聊天存在本地一个加密数据库里，需要数据库密钥才能解密。
+      聊天档案把这个库读出来，导出成能搜索、能打印、能发给别人的文件——聊天数据的解密和导出都在你自己的电脑上完成。
     </p>
     <dl class="cover__spec">
       <div><dt>支持</dt><dd>微信 4.x 桌面版</dd></div>
-      <div><dt>系统</dt><dd>Windows 10+ / macOS 12+</dd></div>
+      <div><dt>系统</dt><dd>Windows 10+ / macOS 11+</dd></div>
       <div><dt>格式</dt><dd>7 种</dd></div>
       <div><dt>免费版</dt><dd>单会话 300 条</dd></div>
     </dl>
@@ -81,14 +81,12 @@
 ├── media/
 │   ├── voice_0041.mp3
 │   ├── img_0087.jpg
-│   └── avatar_li.jpg
-├── 联系人信息.csv
-└── 李老师_聊天记录.pdf</code></pre>
-        <p class="tree__cap">导出的每个会话就是这样一个文件夹，压缩后可以直接发给别人。</p>
+│   └── avatar_li.jpg</code></pre>
+        <p class="tree__cap">这是 HTML 导出的示意结构。选择 PDF 会另外生成 PDF 文件，联系人信息 CSV 需要单独导出。</p>
       </div>
 
       <ul class="points">
-        <li><b>不用联网也能导出</b>　解密、解析、渲染全在本机，飞机上也能用。</li>
+        <li><b>准备完成后可以离线导出</b>　解密、解析、渲染全在本机，飞机上也能用。</li>
         <li><b>图片和语音是真的图片和语音</b>　不是「[图片]」占位，文件都在 media 目录里。</li>
         <li><b>一个会话一个文件夹</b>　整个目录压缩发给别人，对方双击就能看。</li>
       </ul>
@@ -142,14 +140,14 @@
     <section class="chapter" id="c4">
       <header class="chapter__head"><span>04</span><h2>隐私</h2></header>
       <p class="chapter__lede">
-        聊天记录是最私人的数据。这个软件没有服务器来存它，也不做任何上传——
-        数据库、密钥、图片、语音都只在你的机器上。本地服务只监听 <code>127.0.0.1</code>，端口随机，带一次性令牌，同机其它程序也读不到。
+        聊天记录是最私人的数据。聊天内容、数据库密钥、图片和语音不会上传到授权服务器——
+        短码兑换只发送短码和设备指纹。本地服务只监听 <code>127.0.0.1</code>，端口随机，并带一次性令牌，降低同机其他程序访问的风险。
       </p>
 
       <table class="spec">
         <thead><tr><th>动作</th><th>联网情况</th></tr></thead>
         <tbody>
-          <tr><td>导出、浏览、检索</td><td>0 次请求</td></tr>
+          <tr><td>导出、浏览、检索</td><td>准备完成后不请求网络</td></tr>
           <tr><td>解密数据库</td><td>本地文件读写</td></tr>
           <tr><td>语音转文字</td><td>本地转写，不上传</td></tr>
           <tr><td>下载语音模型</td><td>首次使用时联网下载</td></tr>
@@ -187,7 +185,7 @@
         </details>
         <details>
           <summary>免费版能用到什么程度？</summary>
-          <p>每个会话最近 300 条，免费版开放 TXT / CSV；会员解锁七种格式、自定时间范围和语音转文字。</p>
+          <p>每个会话最近 300 条，免费版开放 TXT / CSV；会员解锁七种格式和语音转文字。时间范围筛选当前版本可用。</p>
         </details>
         <details>
           <summary>语音转文字调用哪个接口？</summary>

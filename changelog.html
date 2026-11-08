@@ -53,17 +53,20 @@
       <div class="log">
         <article class="log__item">
           <div>
-            <div class="log__ver">v0.1.0</div>
-            <div class="log__date">2026-11-01</div>
+            <div class="log__ver">v0.1.2</div>
+            <div class="log__date">2026-11-08</div>
           </div>
           <div>
-            <span class="log__tag">首个公开版本</span>
-            <h3>Windows 与 macOS 都能用了</h3>
+            <span class="log__tag">会员与隐私更新</span>
+            <h3>统一 Windows 与 macOS 的授权流程</h3>
             <ul>
-              <li><b>本地解密</b>：读取微信 4.x 的 SQLCipher 数据库，macOS 支持一键自动取密钥（lldb 断点抓 <code>CCKeyDerivationPBKDF</code> 口令），Windows 沿用进程扫描方案。</li>
+              <li><b>短码兑换</b>：Windows 和 macOS 都支持 15 位短码联网兑换，也支持长 token 离线激活。</li>
+              <li><b>续期保护</b>：同一设备续购时累加有效期，激活较短授权时保留更长的现有授权。</li>
+              <li><b>错误提示</b>：区分格式、签名、设备、网络和证书错误，给出下一步处理方式。</li>
+              <li><b>本地解密</b>：读取微信 4.x 的 SQLCipher 数据库，macOS 通过微信副本与 hook 自动获取密钥；旧版微信或排障场景保留命令行抓取方式。</li>
               <li><b>七种导出格式</b>：TXT、Markdown、JSON、CSV、Excel、HTML、PDF。</li>
               <li><b>HTML 归档</b>：图片、语音、表情、引用回复原样还原，自带搜索框。</li>
-              <li><b>本地语音转文字</b>：内置 whisper.cpp，181 MB 模型，不上传、不按次收费。</li>
+              <li><b>本地语音转文字</b>：Windows 使用 whisper.cpp 模型，macOS 使用 SenseVoice 模型，不上传、不按次收费。</li>
               <li><b>多账号</b>：自动扫描本机登录过的微信账号，显示昵称而非 wxid。</li>
               <li><b>离线权限 token</b>：Ed25519 v2 签名，本机验签，绑定设备指纹。</li>
               <li><b>隐私加固</b>：只监听 127.0.0.1、随机端口、一次性令牌；移除更新检查与遥测。</li>
